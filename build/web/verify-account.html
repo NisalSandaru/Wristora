@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="assets/img/icon.png">
 
         <!-- Title -->
-        <title>Wristora - Sign-Up</title>
+        <title>Wristora - Verify account</title>
 
         <!-- ************************* CSS Files ************************* -->
 
@@ -155,28 +155,21 @@
                         <div class="row">
 
                             <div class="col-lg-6">
-                                <h2 class="heading-secondary mb--30">Register</h2>
+                                <h2 class="heading-secondary mb--20">Verify Your Account</h2>
+                                <p class="b2 mb--10">Please verify your email to secure your account and unlock all features. Click the button below to complete the process.</p>
+
+                                <p id="message" class="text-danger"></p>
                                 <div class="login-reg-box p-4 bg--2">
-                                    <p class="text-danger" id="message"></p>
-                                    <form class="singup-form">
+                                    <form class="singin-form">
+
                                         <div class="form-group mb-4">
-                                            <label class="form__label">First Name</label>
-                                            <input id="firstName" type="text" class="form__input form__input--2" value="">
+                                            <label class="form__label">Verification Code</label>
+                                            <input  id="verificationCode" type="text" class="form__input form__input--2" value="">
                                         </div>
-                                        <div class="form-group mb-4">
-                                            <label class="form__label">Last Name</label>
-                                            <input id="lastName" type="text" class=" form__input form__input--2" value="">
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label class="form__label">Email</label>
-                                            <input id="email" type="email" class="form__input form__input--2" value="">
-                                        </div>
-                                        <div class="mb-4 form-group">
-                                            <label class="form__label">Password</label>
-                                            <input id="password" type="password" class="form__input form__input--2" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <button onclick="signUp();" type="button" class="btn btn-5 btn-style-2 submit-btn">Create Account</button>
+
+                                        <div class="form-group d-flex align-items-center justify-content-between">
+                                            <button onclick="verifyAccount();" type="button" class="btn btn-5 btn-style-2 submit-btn">Verify & Continue</button>
+                                            <a href="sign-in.html" class="forgot-btn form__label">Already a member?</a>
                                         </div>
                                     </form>
                                 </div>
