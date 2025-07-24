@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +38,13 @@ public class User implements Serializable{
     
     @Column(name = "created_at", nullable = false)
     private Date created_at;
+    
+    @Column(name = "mobile", length = 10, nullable = false)
+    private String mobile;
+    
+    @ManyToOne
+    @JoinColumn(name = "role_id",  nullable = false)
+    private Role role;
 
     public User(){}
     
@@ -93,5 +102,25 @@ public class User implements Serializable{
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setRole(int role) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

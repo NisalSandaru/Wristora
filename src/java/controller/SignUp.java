@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import hibernate.HibernateUtil;
+import hibernate.Role;
 import hibernate.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +38,7 @@ public class SignUp extends HttpServlet {
         String lastName = user.get("lastName").getAsString();
         final String email = user.get("email").getAsString();
         String password = user.get("password").getAsString();
+        String mobile = user.get("mobile").getAsString();
 
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", false);
@@ -45,6 +47,10 @@ public class SignUp extends HttpServlet {
             responseObject.addProperty("message", "First Name Can not be empty!");
         }else if(lastName.isEmpty()){
             responseObject.addProperty("message", "Last Name Can not be empty!");
+        }else if(mobile.isEmpty()){
+            responseObject.addProperty("message", "Mobile Can not be empty!");
+        }else if(!Util.isMobileValid(mobile)){
+            responseObject.addProperty("message", "Enter valid mobile!");
         }else if(email.isEmpty()){
             responseObject.addProperty("message", "email Can not be empty!");
         }else if(!Util.isEmailValid(email)){
@@ -66,8 +72,11 @@ public class SignUp extends HttpServlet {
                 User u = new User();
                 u.setFirst_name(firstName);
                 u.setLast_name(lastName);
+                u.setMobile(mobile);
                 u.setEmail(email);
                 u.setPassword(password);
+                Role r = (Role)s.get(Role.class, 2);
+                u.setRole(r);
                 
                 //generaete verification code
                 final String veriaficationCode = Util.generateCode();
