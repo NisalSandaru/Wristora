@@ -19,6 +19,11 @@
         <mapping class="hibernate.Color"/>
         <mapping class="hibernate.Quality"/>
         <mapping class="hibernate.Status"/>
+        <mapping class="hibernate.Cart"/>
+        <mapping class="hibernate.DeliveryTypes"/>
+        <mapping class="hibernate.OrderItems"/>
+        <mapping class="hibernate.OrderStatus"/>
+        <mapping class="hibernate.Orders"/>
 
     </session-factory>
 </hibernate-configuration>

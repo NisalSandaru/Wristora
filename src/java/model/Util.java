@@ -12,7 +12,7 @@ public class Util {
     }
 
     public static boolean isMobileValid(String mobile) {
-        return mobile.matches("^(?:0|94|\\+94)(7[01245678])[0-9]{7}$");
+        return mobile.matches("^07[0145678][0-9]{7}$");
     }
 
     public static boolean isPasswordValid(String password) {

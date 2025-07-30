@@ -54,6 +54,68 @@ INDEX:
 /*****************************
 00. Global CSS
 *****************************/
+
+/***************************************************************************/
+
+.brand-circle {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #6c757d; /* gray for unselected */
+  transition: background-color 0.3s ease;
+}
+
+.brand-link.selected-brand .brand-circle {
+  background-color: #ffffff; /* white for selected */
+}
+
+.brand-link.selected-brand {
+  font-weight: bold;
+  color: white !important;
+}
+
+
+.condition-circle {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #6c757d; /* gray for unselected */
+  transition: background-color 0.3s ease;
+}
+
+.condition-link.selected-condition .condition-circle {
+  background-color: #ffffff; /* white for selected */
+}
+
+.bcondition-link.selected-condition {
+  font-weight: bold;
+  color: white !important;
+}
+
+/*****
+
+/* Optional: Customize jQuery UI slider colors */
+#slider-range .ui-slider-range {
+  background: #afafaf;
+}
+#slider-range .ui-slider-handle {
+  border: 2px solid #fff;
+  background-color: #333;
+}
+.amount-range {
+  width: 100%;
+}
+
+
+/****
+
+/************************************************************************/
+
+
+
+
 html {
   font-size: 62.5%; }
 

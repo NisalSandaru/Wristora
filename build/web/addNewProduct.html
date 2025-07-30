@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+
+    <!-- Mirrored from htmldemo.net/mirora/mirora/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jul 2025 18:32:24 GMT -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="meta description">
+        <!-- Favicons -->
+        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="assets/img/icon.png">
+
+        <!-- Title -->
+        <title>Wristora - Add New Product</title>
+
+        <!-- ************************* CSS Files ************************* -->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!-- Elegent Icon CSS -->
+        <link rel="stylesheet" href="assets/css/elegent-icons.css">
+
+        <!-- All Plugins CSS css -->
+        <link rel="stylesheet" href="assets/css/plugins.css">
+
+        <!-- style css -->
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/notification.css">
+
+        <!-- modernizr JS
+        ============================================ -->
+        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+
+    <body onload="loadProductData();">
+        <div class="wrapper bg--shaft">
+            <!-- Header Area Start -->
+            <header class="header headery-style-1">
+
+            </header>
+            <!-- Header Area End -->
+
+            <!-- Breadcumb area Start -->
+            <div class="breadcrumb-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h1 class="page-title">My Account</h1>
+                            <ul class="breadcrumb justify-content-center">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="current"><a href="my-account.html">My Account</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Breadcumb area End -->
+
+            <!-- Main Content wrapper start -->
+
+            <section class="main-content-wrapper">
+                <div class="account-wrapper pt--20 pb--40 pt-md--30 pb-md--60">
+                    <div class="p-4">
+                        <div class="user-dashboard-tab">
+                            <div class="row">
+                                <div class="col-lg-3 mb-md--30">
+                                    <div class="user-dashboard-tab__head nav flex-column" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#dashboard" aria-controls="dashboard" aria-selected="true">Dashboard</a>
+                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#addProduct" aria-controls="product" aria-selected="true">Add New Product</a>
+                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#orders" aria-controls="orders" aria-selected="true">Orders</a>
+                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#downloads" aria-controls="downloads" aria-selected="true">Downloads</a>
+                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#accountdetails" aria-controls="accountdetails" aria-selected="true">Account Details</a>
+                                        <a class="nav-link" href="login-register.html">Logout</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="user-dashboard-tab__content tab-content">
+                                        <div class="tab-pane fade show active" id="dashboard">
+                                            <p>Hello <strong>John</strong> (not <strong>John</strong>? <a href="login.html">Log out</a>)</p>
+                                            <p>From your account dashboard. you can easily check & view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details</a>.</p>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="addProduct">
+                                            <div class="form-row mb--20 row">
+                                                <div class="form__group col-md-6">
+                                                    <label for="brand" class="form__label">Brand <span>*</span></label>
+                                                    <select id="brand" class="form__input form__input--2" style="border: 1px solid white;" onchange="loadModels();">
+                                                        <option value="0">Select a brand</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form__group col-md-6">
+                                                    <label for="model" class="form__label">Model <span>*</span></label>
+                                                    <select id="model" class="form__input form__input--2" style="border: 1px solid white;">
+                                                        <option value="0">Select a Model</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row mb--20 row">
+                                                <div class="form__group col-12 mb-sm--30">
+                                                    <label for="title" class="form__label">Title <span>*</span></label>
+                                                    <input type="text" name="title" id="title" class="form__input form__input--2" style="border: 1px solid white;">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row mb--20 row">
+                                                <div class="form-group col-12 mb-sm--30">
+                                                    <label for="description" class="form__label">Description</label>
+                                                    <textarea id="description" class="form__input form__input--2" rows="4" placeholder="Enter product description" style="border: 1px solid white;"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row mb--20 row">
+                                                <div class="form__group col-md-6">
+                                                    <label for="color" class="form__label">Color <span>*</span></label>
+                                                    <select id="color" class="form__input form__input--2" style="border: 1px solid white;">
+                                                        <option value="0">Select a color</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form__group col-md-6">
+                                                    <label for="condition" class="form__label">Condition <span>*</span></label>
+                                                    <select id="condition" class="form__input form__input--2" style="border: 1px solid white;">
+                                                        <option value="0">Select a condition</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row row mb--20">
+                                                <div class="form-group col-md-6 col-lg-6">
+                                                    <label for="price" class="form__label">Price</label>
+                                                    <input type="text" class="form__input form-control" id="price" placeholder="0.00" pattern="^\d+(\.\d{2})?$" style="border: 1px solid white;">
+                                                </div>
+
+                                                <div class="form-group col-md-6 col-lg-6 quantity">
+                                                    <label for="qty" class="form__label">Quantity</label>
+                                                    <input type="number" class="form__input form-control" name="qty" id="qty" value="1" min="1" style="border: 1px solid white;">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb--20">
+                                                <div class="col-lg-3 mb-3">
+                                                    <label for="img1" class="form__label">Image 1</label>
+                                                    <input class="form-control b2" type="file" accept="image/*" id="img1">
+                                                </div>
+
+                                                <div class="col-lg-3 mb-3">
+                                                    <label for="img2" class="form__label">Image 2</label>
+                                                    <input class="form-control b2" type="file" accept="image/*" id="img2">
+                                                </div>
+
+                                                <div class="col-lg-3 mb-3">
+                                                    <label for="img3" class="form__label">Image 3</label>
+                                                    <input class="form-control b2" type="file" accept="image/*" id="img3">
+                                                </div>
+
+                                                <div class="col-lg-3 mb-3">
+                                                    <label for="img4" class="form__label">Image 4</label>
+                                                    <input class="form-control b2" type="file" accept="image/*" id="img4">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <div class="form-group d-grid gap-2 mt-4">
+                                                    <input 
+                                                        type="button" 
+                                                        class="btn btn-style-2" 
+                                                        value="Add Product To Listing" 
+                                                        onclick="saveProduct();"
+                                                        >
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="tab-pane fade" id="orders">
+                                            <div class="account-table table-content table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                            <th>Total</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td class="wide-column">September 19, 2018</td>
+                                                            <td>Processing</td>
+                                                            <td class="wide-column">$25.00 for 1 item</td>
+                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td class="wide-column">September 19, 2018</td>
+                                                            <td>Processing</td>
+                                                            <td class="wide-column">$25.00 for 1 item</td>
+                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="downloads">
+                                            <div class="account-table table-content table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Downloads</th>
+                                                            <th>Expires</th>
+                                                            <th>Download</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
+                                                            <td class="wide-column">August 10, 2018</td>
+                                                            <td>Never</td>
+                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
+                                                            <td class="wide-column">September 19, 2018</td>
+                                                            <td>Never</td>
+                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="addresses">
+                                            <div class="shipping-address">
+                                                <p>The following addresses will be used on the checkout page by default.</p>
+                                                <h4>Shipping ADDRESS</h4>
+                                                <div class="col-lg-12">
+                                                    <ul class="address-details" id="addressUL">
+                                                        <li id="addName">Name: Name</li>
+                                                        <li id="addEmail">Email:  example@email.com</li>
+                                                        <li id="contact">Phone:  Phone Number</li>
+                                                        <li class="mt--30" id="address"></li>
+                                                    </ul>
+                                                </div>
+                                                <!--                                                <a href="#" data-attr="#shipping_address" class="btn btn-medium btn-style-1 expand_action">Edit</a>
+                                                
+                                                                                                <div class="address-form bg--2 mt--20 hide-in-default" id="shipping_address">
+                                                                                                    <form action="#" class="form">
+                                                
+                                                                                                        <div class="form-row">
+                                                                                                            <div class="form__group col-12">
+                                                                                                                <button type="submit" class="btn btn-5 btn-style-2">Save Address</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </form>
+                                                                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="accountdetails">
+                                            <div class="account-form bg--2">
+
+                                                <div class="form-row mb--20 row">
+                                                    <div class="form__group col-md-6 mb-sm--30">
+                                                        <label for="shipping_fname" class="form__label">First Name <span>*</span></label>
+                                                        <input type="text" name="shipping_fname" id="shipping_fname" class="form__input form__input--2">
+                                                    </div>
+                                                    <div class="form__group col-md-6">
+                                                        <label for="shipping_lname" class="form__label">Last Name <span>*</span></label>
+                                                        <input type="text" name="shipping_lname" id="shipping_lname" class="form__input form__input--2">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row mb--20">
+                                                    <div class="form__group col-12">
+                                                        <label for="shipping_streetAddress" class="form__label">Address Line One</label>
+                                                        <input type="text" name="shipping_streetAddress" id="lineOne" class="form__input form__input--2">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb--20">
+                                                    <div class="form__group col-12">
+                                                        <label for="shipping_apartment" class="form__label">Address Line Two</label>
+                                                        <input type="text" name="shipping_apartment" id="lineTwo" class="form__input form__input--2">
+                                                    </div>
+                                                </div>
+
+                                                <!--                                                    <div class="form-row mb--20">
+                                                                                                        <div class="form__group col-12">
+                                                                                                            <label for="shipping_district" class="form__label">District <span>*</span></label>
+                                                                                                            <select name="shipping_district" id="shipping_district" class="form__input form__input--2 nice-select">
+                                                                                                                <option value="">Select a District…</option>
+                                                                                                                <option>BARISAL</option>
+                                                                                                            </select>
+                                                                                                        </div>
+                                                                                                    </div>-->
+
+                                                <div class="form-row mb--20">
+                                                    <div class="form__group col-12">
+                                                        <label for="shipping_city" class="form__label">City <span>*</span></label>
+                                                        <select id="citySelect" class="form__input form__input--2">
+                                                            <option value="0">Select a City</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row mb--20 row">
+                                                    <div class="form__group col-md-6">
+                                                        <label for="shipping_zip" class="form__label">Postal Code <span>*</span></label>
+                                                        <input type="text" name="shipping_zip" id="postalCode" class="form__input form__input--2">
+                                                    </div>
+                                                    <div class="form__group col-md-6 mb-sm--30">
+                                                        <label for="shipping_phone" class="form__label">Phone</label>
+                                                        <input type="text" name="shipping_phone" id="mobile" class="form__input form__input--2">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <h4>PASSWORD CHANGE</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb--20">
+                                                    <div class="col-12">
+                                                        <div class="form__group">
+                                                            <label for="cur_password" class="form__label">Current Password (leave blank to leave unchanged)</label>
+                                                            <input type="password" name="cur_password" id="currentPassword" class="form__input form__input--2">
+                                                        </div>
+                                                    </div>
+                                                </div>                                             
+                                                <div class="form-row mb--20">
+                                                    <div class="col-12">
+                                                        <div class="form__group">
+                                                            <label for="new_password" class="form__label">New Password (leave blank to leave unchanged)</label>
+                                                            <input type="password" name="new_password" id="newPassword" class="form__input form__input--2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb--20">
+                                                    <div class="col-12">
+                                                        <div class="form__group">
+                                                            <label for="new_password" class="form__label">Confirm Password</label>
+                                                            <input type="password" name="confirm_password" id="confirmPassword" class="form__input form__input--2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="text-danger" id="message" ></p>
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-medium btn-style-2" onclick="saveChanges();">Save Changes</button>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>    
+                </div>
+            </section>
+
+            <!-- Main Content wrapper end -->
+
+            <!-- Footer Start -->
+            <footer class="footer border-top ptb--40 ptb-md--30">
+
+            </footer>
+            <!-- Footer End -->
+
+            <!-- Scroll To Top Start -->    
+            <a class="scroll-to-top" href="#"><i class="fa fa-angle-double-up"></i></a>
+            <!-- Scroll To Top End -->
+
+            <!-- Modal Start -->
+            <div class="modal fade product-modal" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">Close</span>
+                            </button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-6 mb-sm--20">
+                                        <div class="tab-content product-thumb-large">
+                                            <div id="thumb1" class="tab-pane active show fade">
+                                                <img src="assets/img/products/1-1-600x600.jpg" alt="product thumb">
+                                            </div>
+                                            <div id="thumb2" class="tab-pane fade">
+                                                <img src="assets/img/products/2-600x600.jpg" alt="product thumb">
+                                            </div>
+                                            <div id="thumb3" class="tab-pane fade">
+                                                <img src="assets/img/products/10-600x600.jpg" alt="product thumb">
+                                            </div>
+                                            <div id="thumb4" class="tab-pane fade">
+                                                <img src="assets/img/products/11-600x600.jpg" alt="product thumb">
+                                            </div>
+                                            <div id="thumb5" class="tab-pane fade">
+                                                <img src="assets/img/products/12-600x600.jpg" alt="product thumb">
+                                            </div>
+                                            <div id="thumb6" class="tab-pane fade">
+                                                <img src="assets/img/products/13-600x600.jpg" alt="product thumb">
+                                            </div>
+                                        </div>
+                                        <div class="product-thumbnail">
+                                            <div class="thumb-menu" id="modal-thumbmenu">
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb1" data-bs-toggle="tab" class="nav-link active">
+                                                        <img src="assets/img/products/1-1-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb2" data-bs-toggle="tab" class="nav-link">
+                                                        <img src="assets/img/products/2-2-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb3" data-bs-toggle="tab" class="nav-link">
+                                                        <img src="assets/img/products/10-10-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb4" data-bs-toggle="tab" class="nav-link">
+                                                        <img src="assets/img/products/11-11-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb5" data-bs-toggle="tab" class="nav-link">
+                                                        <img src="assets/img/products/12-12-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                                <div class="thumb-menu-item">
+                                                    <a href="#thumb6" data-bs-toggle="tab" class="nav-link">
+                                                        <img src="assets/img/products/13-13-450x450.jpg" alt="product thumb">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6">
+                                        <div class="modal-box product">
+                                            <h3 class="product-title">Acer Aspire E 15</h3>
+                                            <div class="ratings mb--20">
+                                                <i class="fa fa-star rated"></i>
+                                                <i class="fa fa-star rated"></i>
+                                                <i class="fa fa-star rated"></i>
+                                                <i class="fa fa-star rated"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <ul class="product-detail-list list-unstyled mb--20">
+                                                <li>Brand: <a href="#">Apple</a></li>
+                                                <li>Product Code: Watches</li>
+                                                <li>Reward Points: 600</li>
+                                                <li>Availability: In Stock</li>
+                                            </ul>
+                                            <div class="product-price border-bottom pb--20 mb--20">
+                                                <span class="regular-price">$100.50</span>
+                                                <span class="sale-price">$98.98</span>
+                                            </div>
+                                            <div class="product-options mb--20">
+                                                <h3>Available Options</h3>
+                                                <div class="form-group">
+                                                    <label><sup>*</sup>Color Switch</label>
+                                                    <select>
+                                                        <option> --- Please Select --- </option>
+                                                        <option>Black</option>
+                                                        <option>Blue</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="product-action-wrapper mb--20">
+                                                <div class="product-action-top d-flex align-items-center mb--20">
+                                                    <div class="quantity">
+                                                        <span>Qty: </span>
+                                                        <input type="number" class="quantity-input" name="qty" id="qty" value="1" min="1">
+                                                    </div>
+                                                    <button type="button" class="btn btn-medium btn-style-2 add-to-cart">
+                                                        Add To Cart
+                                                    </button>
+                                                </div>
+                                                <div class="product-action-bottom">
+                                                    <a href="wishlist.html">+Add to wishlist</a>
+                                                    <a href="compare.html">+Add to compare</a>
+                                                </div>
+                                            </div>  
+                                            <p class="product-tags">
+                                                Tags: <a href="shop.html">Sport</a>,
+                                                <a href="shop.html">Luxury</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal End -->
+
+        </div>
+
+
+
+        <!-- ************************* JS Files ************************* -->
+
+        <!-- jQuery JS -->
+        <script src="assets/js/vendor/jquery.min.js"></script>
+
+        <!-- Bootstrap and Popper Bundle JS -->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+        <!-- All Plugins Js -->
+        <script src="assets/js/plugins.js"></script>
+        <!-- Ajax Mail Js -->
+        <script src="assets/js/ajax-mail.js"></script>
+
+        <!-- Main JS -->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/notification.js"></script>
+        <script src="assets/js/product-listing.js"></script>
+    </body>
+</html>

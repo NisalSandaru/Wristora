@@ -43,6 +43,15 @@ public class Address implements Serializable{
     @JoinColumn(name = "user_id")
     private User user;
     
+    @Column(name = "first_name", length = 45)
+    private String firstName;
+    
+    @Column(name = "last_name", length = 45)
+    private String lastName;
+    
+    @Column(name = "mobile", nullable = false, length = 10)
+    private String mobile;
+    
     public Address(){}
 
     public int getId() {
@@ -91,5 +100,29 @@ public class Address implements Serializable{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

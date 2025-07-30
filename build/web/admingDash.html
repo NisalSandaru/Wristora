@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Wristora</title>
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/elegent-icons.css">
+    <link rel="stylesheet" href="assets/css/plugins.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <div class="d-flex">
+        <nav id="sidebar" class="bg-dark text-white vh-100 p-3" style="min-width:220px;">
+            <div class="sidebar-header mb-4">
+                <h3><i class="fa fa-user-shield"></i> Wristora Admin</h3>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a class="nav-link text-white active" href="#"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fa fa-users"></i> Users</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fa fa-product-hunt"></i> Products</a></li>
+                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </nav>
+        <div class="flex-grow-1" id="main-content">
+            <div class="container mt-5">
+                <h1 class="mb-4">Admin Dashboard</h1>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa fa-users"></i> Users</h5>
+                                <p class="card-text">Manage registered users.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa fa-cogs"></i> Settings</h5>
+                                <p class="card-text">Configure application settings.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa fa-bar-chart"></i> Reports</h5>
+                                <p class="card-text">View usage reports and analytics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa fa-product-hunt"></i> Products</h5>
+                                <p class="card-text">Add and manage products.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <i class="fa fa-plus"></i> Add Product
+                    </div>
+                    <div class="card-body">
+                        <form id="addProductForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="productName">Product Name</label>
+                                    <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="productPrice">Price</label>
+                                    <input type="number" class="form-control" id="productPrice" placeholder="Enter price" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="productCategory">Category</label>
+                                    <input type="text" class="form-control" id="productCategory" placeholder="Enter category" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info">Add Product</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <i class="fa fa-list"></i> Product List
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Product rows will be added here by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- JS Scripts -->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script>
+        // Product management with edit and delete
+        let products = [];
+        let editIndex = null;
+
+        function renderProducts() {
+            const table = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+            products.forEach((product, idx) => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = product.name;
+                row.insertCell(1).innerText = product.price;
+                row.insertCell(2).innerText = product.category;
+                const actionsCell = row.insertCell(3);
+                actionsCell.innerHTML = `
+                    <button class="btn btn-sm btn-warning mr-2" onclick="editProduct(${idx})"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteProduct(${idx})"><i class="fa fa-trash"></i></button>
+                `;
+            });
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const category = document.getElementById('productCategory').value;
+            if (editIndex !== null) {
+                products[editIndex] = { name, price, category };
+                editIndex = null;
+                document.querySelector('#addProductForm button[type="submit"]').innerText = 'Add Product';
+            } else {
+                products.push({ name, price, category });
+            }
+            document.getElementById('addProductForm').reset();
+            renderProducts();
+        });
+
+        window.editProduct = function(idx) {
+            const product = products[idx];
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productCategory').value = product.category;
+            editIndex = idx;
+            document.querySelector('#addProductForm button[type="submit"]').innerText = 'Update Product';
+        };
+
+        window.deleteProduct = function(idx) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products.splice(idx, 1);
+                renderProducts();
+            }
+        };
+
+        // Initial render
+        renderProducts();
+        </script>
+    </div>
+</body>
+</html>
