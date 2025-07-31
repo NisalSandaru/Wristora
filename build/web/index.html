@@ -42,7 +42,7 @@
         <![endif]-->
     </head>
 
-    <body onload="indexOnloadFunctions();">
+    <body onload="indexOnloadFunctions(); viewCart();">
 
 
         <!-- Main Wrapper Start -->
@@ -161,52 +161,19 @@
                                         <li class="mini-cart-icon">
                                             <div class="mini-cart mini-cart--1">
                                                 <a class="mini-cart__dropdown-toggle bordered-icon" id="cartDropdown">
-                                                    <span class="mini-cart__count">0</span>
-                                                    <i class="icon_cart_alt mini-cart__icon"></i>
-                                                    <span class="mini-cart__ammount">80.00 <i class="fa fa-angle-down"></i></span>
+                                                    <span class="mini-cart__count" onclick="viewCart();" id="count">0</span>
+                                                    <i class="icon_cart_alt mini-cart__icon" onclick="viewCart();"></i>
+                                                    <span class="mini-cart__ammount" onclick="viewCart();" id="miniPrice">00 <i class="fa fa-angle-down"></i></span>
                                                 </a>
-                                                <div class="mini-cart__dropdown-menu">
+                                                <div class="mini-cart__dropdown-menu" onclick="viewCart();">
                                                     <div class="mini-cart__content" id="miniCart">
-                                                        <div class="mini-cart__item">
-                                                            <div class="mini-cart__item--single">
-                                                                <div class="mini-cart__item--image">
-                                                                    <img src="assets/img/products/1-1-450x450.jpg" alt="product">
-                                                                </div>
-                                                                <div class="mini-cart__item--content">
-                                                                    <h4 class="mini-cart__item--name"><a href="product-details.html">Dell Inspiron 24</a> </h4>
-                                                                    <p class="mini-cart__item--quantity">x1</p>
-                                                                    <p class="mini-cart__item--price">$100.00</p>
-                                                                </div>
-                                                                <a class="mini-cart__item--remove" href="#"><i class="icon_close"></i></a>
-                                                            </div>
-                                                            <div class="mini-cart__item--single">
-                                                                <div class="mini-cart__item--image">
-                                                                    <img src="assets/img/products/2-2-450x450.jpg" alt="product">
-                                                                </div>
-                                                                <div class="mini-cart__item--content">
-                                                                    <h4 class="mini-cart__item--name"><a href="product-details.html">Acer Aspire AIO <br>-<small>Color Swatch Black</small></a> </h4>
-                                                                    <p class="mini-cart__item--quantity">x1</p>
-                                                                    <p class="mini-cart__item--price">$100.00</p>
-                                                                </div>
-                                                                <a class="mini-cart__item--remove" href="#"><i class="icon_close"></i></a>
-                                                            </div>
+                                                        <div class="mini-cart__item" id="side-panal-cart-item-list">
+                                                            
                                                         </div>
                                                         <div class="mini-cart__calculation">
                                                             <p>
                                                                 <span class="mini-cart__calculation--item">Sub-Total :</span>
-                                                                <span class="mini-cart__calculation--ammount">$1,070.00</span>
-                                                            </p>
-                                                            <p>
-                                                                <span class="mini-cart__calculation--item">Eco Tax (-2.00) :</span>
-                                                                <span class="mini-cart__calculation--ammount">$4.00</span>
-                                                            </p>
-                                                            <p>
-                                                                <span class="mini-cart__calculation--item">Eco VAT (20%) :</span>
-                                                                <span class="mini-cart__calculation--ammount">$214.00</span>
-                                                            </p>
-                                                            <p>
-                                                                <span class="mini-cart__calculation--item">Eco Total :</span>
-                                                                <span class="mini-cart__calculation--ammount"> $1,288.00</span>
+                                                                <span class="mini-cart__calculation--ammount" id="side-panel-cart-sub-total">00</span>
                                                             </p>
                                                         </div>
                                                         <div class="mini-cart__btn">
@@ -519,7 +486,73 @@
 
                 <!-- Products Tab area Start -->
 
-                <div class="product-tab pt--80 pb--60 pt-md--60 pb-md--45">
+                <!-- New Arrivals Section -->
+                <section class="container py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">New Arrivals</h2>
+                        <a href="shop.html" class="btn btn-outline-dark">All Products</a>
+                    </div>
+
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4" id="new-arrival-product-container">
+                        <!-- Product 1 -->
+                            <div class="col">
+                                <div class="mirora-product">
+                                    <div class="product-img">
+                                        <img src="assets/img/products/10-450x450.jpg" alt="Product" class="primary-image" />
+                                        <img src="assets/img/products/10-10-450x450.jpg" alt="Product" class="secondary-image" />
+                                        <div class="product-img-overlay">
+                                            <span class="product-label discount">-7%</span>
+                                            <a data-bs-toggle="modal" data-bs-target="#productModal" class="btn btn-transparent btn-fullwidth btn-medium btn-style-1">Quick View</a>
+                                        </div>
+                                    </div>
+                                    <div class="product-content text-center">
+                                        <span>Cartier</span>
+                                        <h4><a href="product-details.html">Acer Aspire E 15</a></h4>
+                                        <div class="product-price-wrapper">
+                                            <span class="money">$550.00</span>
+                                            <span class="product-price-old">
+                                                <span class="money">$700.00</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mirora_product_action text-center position-absolute">
+                                        <div class="product-rating">
+                                            <span>
+                                                <i class="fa fa-star theme-star"></i>
+                                                <i class="fa fa-star theme-star"></i>
+                                                <i class="fa fa-star theme-star"></i>
+                                                <i class="fa fa-star theme-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </span>
+                                        </div>
+                                        <p>It is a long established fact that a reader will be distracted by the readable content...</p>
+                                        <div class="product-action">
+                                            <a class="same-action" href="wishlist.html" title="wishlist">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+                                            <a class="add_cart cart-item action-cart" href="cart.html" title="wishlist"><span>Add to cart</span></a>
+                                            <a class="same-action compare-mrg" data-bs-toggle="modal" data-bs-target="#productModal" href="compare.html">
+                                                <i class="fa fa-sliders fa-rotate-90"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        <!-- Repeat <div class="col">...</div> for each additional product -->
+
+                    </div>
+
+                    <!-- All Products Button at Bottom -->
+                    <div class="text-center mt-5">
+                        <a href="shop.html" class="btn btn-dark btn-lg px-5">All Products</a>
+                    </div>
+                </section>
+
+
+
+<!--                <div class="product-tab pt--80 pb--60 pt-md--60 pb-md--45">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
@@ -1002,7 +1035,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--                                    <div class="tab-pane fade" id="nav-new" role="tabpanel">
+                                                                        <div class="tab-pane fade" id="nav-new" role="tabpanel">
                                                                             <div class="product-carousel nav-top js-product-carousel-2">
                                                                                 <div class="row " id="new-arrival-product-container">
                                                                                     <div class="product-carousel-group">
@@ -1055,8 +1088,8 @@
                                                                                 </div>
                                     
                                                                             </div>
-                                                                        </div>-->
-                                    <!--                                    <div class="tab-pane fade" id="nav-bestseller" role="tabpanel">
+                                                                        </div>
+                                                                        <div class="tab-pane fade" id="nav-bestseller" role="tabpanel">
                                                                             
                                                                             <div class="row">
                                                                                 <div class="col-12">
@@ -1112,7 +1145,7 @@
                                                                                 </div>
                                                                             </div>
                                     
-                                                                        </div>-->
+                                                                        </div>
                                     <div class="tab-pane fade" id="nav-onsale" role="tabpanel">
                                         <div class="product-carousel js-product-carousel">
                                             <div class="product-carousel-group">
@@ -1581,7 +1614,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <!-- Products Tab area End -->
 
@@ -2148,8 +2181,10 @@
         <script src="assets/js/main.js"></script>
         <script src="assets/js/notification.js"></script>
         <script src="assets/js/index.js"></script>
+        <script src="assets/js/miniCart.js"></script>
+        <script src="assets/js/removeCart.js"></script>
 
-        
+
 
     </body>
 

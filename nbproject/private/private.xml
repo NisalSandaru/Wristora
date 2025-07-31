@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/assets/js/product-listing.js</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/src/java/controller/LoadProdcutData.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/addNewProduct.html</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/assets/js/miniCart.js</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/assets/js/cart.js</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/index.html</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/src/java/controller/LoadCartItems.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/src/java/controller/RemoveCartItems.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/cart.html</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Wristora/web/assets/js/removeCart.js</file>
         </group>
     </open-files>
 </project-private>

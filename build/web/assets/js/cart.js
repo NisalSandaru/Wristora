@@ -31,7 +31,7 @@ async  function loadCartItems() {
                 totalQty += cart.qty;
 
                 let tableData = `<tr id="cart-item-row">
-                                                    <td><a class="delete" href="#"><i class="fa fa-times"></i></a></td>
+                                                    <td><a class="delete" href="#" ><i class="fa fa-times" onclick="removeCartItems(${cart.product.id});"></i></a></td>
                                                     <td>
                                                         <a href="product-details.html?id=${cart.product.id}">
                                                             <img src="product-images\\${cart.product.id}\\image1.png" alt="product">

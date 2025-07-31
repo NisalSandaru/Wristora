@@ -33,7 +33,7 @@ import org.hibernate.criterion.Restrictions;
 @WebServlet(name = "SaveProduct", urlPatterns = {"/SaveProduct"})
 public class SaveProduct extends HttpServlet {
 
-    private static final int PENDING_STAUTUS_ID = 1;
+    private static final int ACRIVE_STAUTUS_ID = 2;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -129,7 +129,7 @@ public class SaveProduct extends HttpServlet {
                                 p.setPrice(Double.parseDouble(price));
                                 p.setQty(Integer.parseInt(qty));
 
-                                Status status = (Status) s.get(Status.class, SaveProduct.PENDING_STAUTUS_ID);
+                                Status status = (Status) s.get(Status.class, SaveProduct.ACRIVE_STAUTUS_ID);
                                 p.setStatus(status);
                                 User user = (User) request.getSession().getAttribute("user");
 

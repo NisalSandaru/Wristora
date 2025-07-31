@@ -37,12 +37,15 @@ Wristora is a web application project. This repository contains the source code,
 - Hibernate ORM integration
 - Email notifications
 - Session management
+- Admin dashboard with left sidebar navigation
+- Product management: add, edit, and delete products
 
 ## Folder Details
 - `src/java/controller/` - Servlets and controllers
 - `src/java/hibernate/` - Hibernate utility and entity classes
 - `src/java/model/` - Utility and filter classes
 - `web/assets/` - Static assets (CSS, JS, images, fonts)
+- `web/admingDash.html` - Admin dashboard HTML file
 
 ## License
 This project is licensed under the MIT License.

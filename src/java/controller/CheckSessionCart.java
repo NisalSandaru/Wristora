@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controller;
 
 import hibernate.Cart;
@@ -79,7 +76,7 @@ public class CheckSessionCart extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }
         } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setStatus(1);
         }
     }
 }

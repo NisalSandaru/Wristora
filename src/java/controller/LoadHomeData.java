@@ -45,7 +45,7 @@ public class LoadHomeData extends HttpServlet {
         c2.add(Restrictions.eq("status", status));
         
         c2.setFirstResult(0);
-        c2.setMaxResults(8);
+        c2.setMaxResults(10);
         
         List<Product> productList = c2.list();
         for (Product product : productList) {
