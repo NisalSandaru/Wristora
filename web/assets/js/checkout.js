@@ -50,8 +50,8 @@ async function loadCheckoutData() {
                 let postal_code = document.getElementById("postal-code");
                 let mobile = document.getElementById("mobile");
                 if (current_address_checkbox.checked) {
-                    first_name.value = userAddress.user.first_name;
-                    last_name.value = userAddress.user.last_name;
+                    first_name.value = userAddress.firstName;
+                    last_name.value = userAddress.lastName;
                     city_select.value = userAddress.city.id;
                     city_select.disabled = true;
                     city_select.dispatchEvent(new Event("change"));

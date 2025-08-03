@@ -20,23 +20,28 @@ import javax.persistence.Table;
  * @author Dilhara
  */
 @Entity
-@Table(name="orders")
-public class Orders implements Serializable{
+@Table(name = "orders")
+public class Orders implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
-    
+
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
-    
-    @Column(name="created_at")
+
+    @Column(name = "created_at")
     private Date createdAt;
-    
+
     @ManyToOne
-    @JoinColumn(name="address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "order_status_id")
+    private OrderStatus orderStatus;
 
     public Orders() {
     }
@@ -72,5 +77,13 @@ public class Orders implements Serializable{
     public void setAddress(Address address) {
         this.address = address;
     }
-    
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
 }

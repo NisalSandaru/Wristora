@@ -31,6 +31,7 @@
 
         <!-- style css -->
         <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/notification.css">
 
         <!-- modernizr JS
         ============================================ -->
@@ -422,10 +423,9 @@
                                     <div class="user-dashboard-tab__head nav flex-column" role="tablist" aria-orientation="vertical">
                                         <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#dashboard" aria-controls="dashboard" aria-selected="true">Dashboard</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#orders" aria-controls="orders" aria-selected="true">Orders</a>
-                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#downloads" aria-controls="downloads" aria-selected="true">Downloads</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#addresses" aria-controls="addresses" aria-selected="true">Addresses</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#accountdetails" aria-controls="accountdetails" aria-selected="true">Account Details</a>
-                                        <a class="nav-link" href="login-register.html">Logout</a>
+                                        <a class="nav-link" href="#" onclick="signOut();">Logout</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
@@ -442,61 +442,81 @@
                                                             <th>Order</th>
                                                             <th>Date</th>
                                                             <th>Status</th>
-                                                            <th>Total</th>
+<!--                                                            <th>Total</th>-->
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Processing</td>
-                                                            <td class="wide-column">$25.00 for 1 item</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Processing</td>
-                                                            <td class="wide-column">$25.00 for 1 item</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
-                                                        </tr>
+                                                    <tbody id="order-item-container">
+                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="downloads">
-                                            <div class="account-table table-content table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product</th>
-                                                            <th>Downloads</th>
-                                                            <th>Expires</th>
-                                                            <th>Download</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
-                                                            <td class="wide-column">August 10, 2018</td>
-                                                            <td>Never</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Never</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="tab-pane fade" id="addresses">
                                             <div class="shipping-address">
                                                 <p>The following addresses will be used on the checkout page by default.</p>
                                                 <h4>Shipping ADDRESS</h4>
+
+                                                <a href="#" data-attr="#shipping_address" class="btn btn-medium btn-style-1 expand_action">Edit</a>
+
+                                                <div class="address-form bg--2 mt--20 hide-in-default" id="shipping_address">
+                                                    <div class="account-form bg--2">
+
+                                                        <div class="form-row mb--20 row">
+                                                            <div class="form__group col-md-6 mb-sm--30">
+                                                                <label for="shipping_fname" class="form__label">First Name <span>*</span></label>
+                                                                <input type="text" name="shipping_fname" id="shipping_fname" class="form__input form__input--2">
+                                                            </div>
+                                                            <div class="form__group col-md-6">
+                                                                <label for="shipping_lname" class="form__label">Last Name <span>*</span></label>
+                                                                <input type="text" name="shipping_lname" id="shipping_lname" class="form__input form__input--2">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-row mb--20">
+                                                            <div class="form__group col-12">
+                                                                <label for="shipping_streetAddress" class="form__label">Address Line One</label>
+                                                                <input type="text" name="shipping_streetAddress" id="lineOne" class="form__input form__input--2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row mb--20">
+                                                            <div class="form__group col-12">
+                                                                <label for="shipping_apartment" class="form__label">Address Line Two</label>
+                                                                <input type="text" name="shipping_apartment" id="lineTwo" class="form__input form__input--2">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-row mb--20">
+                                                            <div class="form__group col-12">
+                                                                <label for="shipping_city" class="form__label">City <span>*</span></label>
+                                                                <select id="citySelect" class="form__input form__input--2">
+                                                                    <option value="0">Select a City</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-row mb--20 row">
+                                                            <div class="form__group col-md-6">
+                                                                <label for="shipping_zip" class="form__label">Postal Code <span>*</span></label>
+                                                                <input type="text" name="shipping_zip" id="postalCode" class="form__input form__input--2">
+                                                            </div>
+                                                            <div class="form__group col-md-6 mb-sm--30">
+                                                                <label for="shipping_phone" class="form__label">Phone</label>
+                                                                <input type="text" name="shipping_phone" id="mobile" class="form__input form__input--2">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <p class="text-danger" id="message" ></p>
+                                                        <div class="form-row">
+                                                            <div class="col-12">
+                                                                <button type="submit" class="btn btn-medium btn-style-2" onclick="saveChanges();">Save Changes</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-lg-12">
                                                     <ul class="address-details" id="addressUL">
                                                         <li id="addName">Name: Name</li>
@@ -505,74 +525,30 @@
                                                         <li class="mt--30" id="address"></li>
                                                     </ul>
                                                 </div>
-<!--                                                <a href="#" data-attr="#shipping_address" class="btn btn-medium btn-style-1 expand_action">Edit</a>
 
-                                                <div class="address-form bg--2 mt--20 hide-in-default" id="shipping_address">
-                                                    <form action="#" class="form">
-
-                                                        <div class="form-row">
-                                                            <div class="form__group col-12">
-                                                                <button type="submit" class="btn btn-5 btn-style-2">Save Address</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>-->
                                             </div>
                                         </div>
+                                        
+                                        
+                                        
                                         <div class="tab-pane fade" id="accountdetails">
                                             <div class="account-form bg--2">
-                                          
+
                                                 <div class="form-row mb--20 row">
                                                     <div class="form__group col-md-6 mb-sm--30">
                                                         <label for="shipping_fname" class="form__label">First Name <span>*</span></label>
-                                                        <input type="text" name="shipping_fname" id="shipping_fname" class="form__input form__input--2">
+                                                        <input type="text" name="shipping_fname" id="fname" class="form__input form__input--2">
                                                     </div>
                                                     <div class="form__group col-md-6">
                                                         <label for="shipping_lname" class="form__label">Last Name <span>*</span></label>
-                                                        <input type="text" name="shipping_lname" id="shipping_lname" class="form__input form__input--2">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_streetAddress" class="form__label">Address Line One</label>
-                                                        <input type="text" name="shipping_streetAddress" id="lineOne" class="form__input form__input--2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_apartment" class="form__label">Address Line Two</label>
-                                                        <input type="text" name="shipping_apartment" id="lineTwo" class="form__input form__input--2">
-                                                    </div>
-                                                </div>
-
-                                                <!--                                                    <div class="form-row mb--20">
-                                                                                                        <div class="form__group col-12">
-                                                                                                            <label for="shipping_district" class="form__label">District <span>*</span></label>
-                                                                                                            <select name="shipping_district" id="shipping_district" class="form__input form__input--2 nice-select">
-                                                                                                                <option value="">Select a District…</option>
-                                                                                                                <option>BARISAL</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>-->
-
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_city" class="form__label">City <span>*</span></label>
-                                                        <select id="citySelect" class="form__input form__input--2">
-                                                            <option value="0">Select a City</option>
-                                                        </select>
+                                                        <input type="text" name="shipping_lname" id="lname" class="form__input form__input--2">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-row mb--20 row">
-                                                    <div class="form__group col-md-6">
-                                                        <label for="shipping_zip" class="form__label">Postal Code <span>*</span></label>
-                                                        <input type="text" name="shipping_zip" id="postalCode" class="form__input form__input--2">
-                                                    </div>
                                                     <div class="form__group col-md-6 mb-sm--30">
                                                         <label for="shipping_phone" class="form__label">Phone</label>
-                                                        <input type="text" name="shipping_phone" id="mobile" class="form__input form__input--2">
+                                                        <input type="text" name="shipping_phone" id="mMobile" class="form__input form__input--2">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -607,11 +583,10 @@
                                                 <p class="text-danger" id="message" ></p>
                                                 <div class="form-row">
                                                     <div class="col-12">
-                                                        <button type="submit" class="btn btn-medium btn-style-2" onclick="saveChanges();">Save Changes</button>
+                                                        <button type="submit" class="btn btn-medium btn-style-2" onclick="saveProChanges();">Save Changes</button>
                                                     </div>
                                                 </div>
 
-                                               
                                             </div>
 
                                         </div>
@@ -948,6 +923,7 @@
         <script src="assets/js/main.js"></script>
         <script src="assets/js/my-account.js"></script>
         <script src="assets/js/notification.js"></script>
+        <script src="assets/js/sign-out.js"></script>
 
     </body>
 

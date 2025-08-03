@@ -54,7 +54,8 @@ function loadOptions(prefix, dataList, property) {
             all_li.forEach(y => {
                 y.classList.remove("chosen");
                 const a = y.querySelector("a");
-                if (!a) return;
+                if (!a)
+                    return;
                 if (prefix === "color") {
                     a.style.border = "2px solid transparent";
                 } else {
@@ -64,7 +65,8 @@ function loadOptions(prefix, dataList, property) {
 
             this.classList.add("chosen");
             const selectedAnchor = this.querySelector("a");
-            if (!selectedAnchor) return;
+            if (!selectedAnchor)
+                return;
 
             if (prefix === "color") {
                 selectedAnchor.style.border = "3px solid #ffffff";
@@ -136,8 +138,9 @@ async function searchProduct(firstResult) {
 
 
 const st_product = document.getElementById("st-product"); // product card parent node
-//let st_pagination_button = document.getElementById("st-pagination-button");
-//let current_page = 0;
+
+let current_page = 0;
+const product_per_page = 9; // match your "Show: 9" default
 
 function updateProductView(json) {
     const product_container = document.getElementById("st-product-container");
@@ -163,79 +166,101 @@ function updateProductView(json) {
         product_container.appendChild(st_product_clone);
     });
 
-//    let st_pagination_container = document.getElementById("st-pagination-container");
-//    st_pagination_container.innerHTML = "";
-//    let all_product_count = json.allProductCount;
-//    document.getElementById("all-item-count").innerHTML = all_product_count;
-//    let product_per_page = 6;
-//    let pages = Math.ceil(all_product_count / product_per_page); // round upper integer 
-//
-//    //previous-button
-//    if (current_page !== 0) {
-//        let st_pagination_button_prev_clone = st_pagination_button.cloneNode(true);
-//        st_pagination_button_prev_clone.innerHTML = "Prev";
-//        st_pagination_button_prev_clone.addEventListener(
-//                "click", (e) => {
-//            current_page--;
-//            searchProduct(current_page * product_per_page);
-//            e.preventDefault();
-//        });
-//        st_pagination_container.appendChild(st_pagination_button_prev_clone);
-//    }
-//
-//
-//    // pagination-buttons
-//    for (let i = 0; i < pages; i++) {
-//        let st_pagination_button_clone = st_pagination_button.cloneNode(true);
-//        st_pagination_button_clone.innerHTML = i + 1;
-//        st_pagination_button_clone.addEventListener(
-//                "click", (e) => {
-//            current_page = i;
-//            searchProduct(i * product_per_page);
-//            e.preventDefault();
-//        });
-//
-//        if (i === Number(current_page)) {
-//            st_pagination_button_clone.className = "axil-btn btn btn-primary btn-lg fw-bold ml--10";
-//        } else {
-//            st_pagination_button_clone.className = "axil-btn btn btn-outline-secondary btn-lg ml--10";
-//        }
-//        st_pagination_container.appendChild(st_pagination_button_clone);
-//    }
-//
-//    // next-button
-//    if (current_page !== (pages - 1)) {
-//        let st_pagination_button_next_clone = st_pagination_button.cloneNode(true);
-//        st_pagination_button_next_clone.innerHTML = "Next";
-//        st_pagination_button_next_clone.addEventListener(
-//                "click", (e) => {
-//            current_page++;
-//            searchProduct(current_page * product_per_page);
-//            e.preventDefault();
-//        });
-//        st_pagination_container.appendChild(st_pagination_button_next_clone);
-//    }
+    updatePagination(json.allProductCount);
+
 }
 
+function updatePagination(allProductCount) {
+    const st_pagination_container = document.getElementById("st-pagination-container");
+    st_pagination_container.innerHTML = "";
+
+    const total_pages = Math.ceil(allProductCount / product_per_page);
+
+    // First page <<
+    const first = document.createElement("li");
+    first.innerHTML = `<a href="#">&laquo;</a>`;
+    first.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (current_page > 0) {
+            current_page = 0;
+            searchProduct(current_page * product_per_page);
+        }
+    });
+    st_pagination_container.appendChild(first);
+
+    // Previous page <
+    const prev = document.createElement("li");
+    prev.innerHTML = `<a href="#">&lsaquo;</a>`;
+    prev.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (current_page > 0) {
+            current_page--;
+            searchProduct(current_page * product_per_page);
+        }
+    });
+    st_pagination_container.appendChild(prev);
+
+    // Page numbers
+    for (let i = 0; i < total_pages; i++) {
+        const page = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "#";
+        link.textContent = i + 1;
+        if (i === current_page) {
+            link.classList.add("current");
+        }
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            current_page = i;
+            searchProduct(current_page * product_per_page);
+        });
+        page.appendChild(link);
+        st_pagination_container.appendChild(page);
+    }
+
+    // Next page >
+    const next = document.createElement("li");
+    next.innerHTML = `<a href="#">&rsaquo;</a>`;
+    next.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (current_page < total_pages - 1) {
+            current_page++;
+            searchProduct(current_page * product_per_page);
+        }
+    });
+    st_pagination_container.appendChild(next);
+
+    // Last page >>
+    const last = document.createElement("li");
+    last.innerHTML = `<a href="#">&raquo;</a>`;
+    last.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (current_page < total_pages - 1) {
+            current_page = total_pages - 1;
+            searchProduct(current_page * product_per_page);
+        }
+    });
+    st_pagination_container.appendChild(last);
+}
 
 
 async function addToCart(productId, qty) {
     const popup = new Notification();
-    const response = await fetch("AddToCart?prId=" + productId + "&qty=" +qty);
-    if(response.ok){
+    const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
+    if (response.ok) {
         const json = await response.json();
-        if(json.status){
+        if (json.status) {
             popup.success({
                 message: json.message
             });
-        }else{
+        } else {
             popup.success({
                 message: "Somthing went wrong"
             });
         }
-    }else{
+    } else {
         popup.error({
-                message: "Somthing went wrong"
-            });
+            message: "Somthing went wrong"
+        });
     }
 }

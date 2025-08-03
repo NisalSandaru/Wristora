@@ -1,22 +1,15 @@
 async  function loadCartItems() {
-
     const popup = new Notification();
-
-
     //send data using get
     const response = await fetch("LoadCartItems");
 
     if (response.ok) {
-
         //if the response is ok
-
         const json = await response.json();
 
         if (json.status) {
-
             //if the status is true
             console.log(json);
-
             const cart_item_container = document.getElementById("cart-item-container");
 
             cart_item_container.innerHTML = "";

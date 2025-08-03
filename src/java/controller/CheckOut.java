@@ -136,8 +136,11 @@ public class CheckOut extends HttpServlet {
             JsonObject responseObject) {
 
         try {
+            OrderStatus orderStatus = (OrderStatus) s.get(OrderStatus.class, CheckOut.ORDER_PENDING);
+            
             Orders orders = new Orders();
             orders.setAddress(address);
+            orders.setOrderStatus(orderStatus);
             orders.setCreatedAt(new Date());
             orders.setUser(user);
 
@@ -147,13 +150,16 @@ public class CheckOut extends HttpServlet {
             c1.add(Restrictions.eq("user", user));
             List<Cart> cartList = c1.list();
 
-            OrderStatus orderStatus = (OrderStatus) s.get(OrderStatus.class, CheckOut.ORDER_PENDING);
             DeliveryTypes withInColombo = (DeliveryTypes) s.get(DeliveryTypes.class, CheckOut.WITHIN_COLOMBO);
             DeliveryTypes outOfColombo = (DeliveryTypes) s.get(DeliveryTypes.class, CheckOut.OUT_OF_COLOMBO);
 
             double amount = 0;
             String items = "";
 
+            if(cartList.isEmpty()){
+                throw new Exception();
+            }else{
+            
             for (Cart cart : cartList) {
                 amount += cart.getQty() * cart.getProduct().getPrice();
 
@@ -169,7 +175,7 @@ public class CheckOut extends HttpServlet {
                 items += cart.getProduct().getTitle() + " x " + cart.getQty() + ", ";
 
                 Product product = cart.getProduct();
-                orderItems.setOrderStatus(orderStatus);
+//                orderItems.setOrderStatus(orderStatus);
                 orderItems.setOrders(orders);
                 orderItems.setProduct(product);
                 orderItems.setQty(cart.getQty());
@@ -228,7 +234,7 @@ public class CheckOut extends HttpServlet {
             responseObject.addProperty("status", true);
             responseObject.addProperty("message", "Cechkout completed");
             responseObject.add("payhereJson", new Gson().toJsonTree(payHereJson));
-            
+            }
         } catch (Exception e) {
             tr.rollback();
         }

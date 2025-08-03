@@ -33,9 +33,9 @@ public class OrderItems implements Serializable{
     @Column(name = "qty", nullable = false)
     private int qty;
     
-    @ManyToOne
-    @JoinColumn(name="order_status_id")
-    private OrderStatus orderStatus;
+//    @ManyToOne
+//    @JoinColumn(name="order_status_id")
+//    private OrderStatus orderStatus;
     
     @ManyToOne
     @JoinColumn(name="delivery_type_id")
@@ -75,13 +75,13 @@ public class OrderItems implements Serializable{
         this.qty = qty;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+//    public OrderStatus getOrderStatus() {
+//        return orderStatus;
+//    }
+//
+//    public void setOrderStatus(OrderStatus orderStatus) {
+//        this.orderStatus = orderStatus;
+//    }
 
     public DeliveryTypes getDeliveryTypes() {
         return deliveryTypes;

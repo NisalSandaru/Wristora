@@ -102,7 +102,7 @@ async function addToCart(productId, qty) {
             });
         } else {
             popup.error({
-                message: "Something went wrong. Try again"
+                message: json.message
             });
 
         }
