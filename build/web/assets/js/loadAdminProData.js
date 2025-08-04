@@ -1,6 +1,12 @@
 let currentPage = 0;
-const adproPerPage = 10;
+const adproPerPage = 20;
 let totalPages = 0;
+
+function loadProData() {
+    loadAdProItems();
+    loadBrandData();
+}
+
 
 async function loadAdProItems(firstResult = 0) {
     const popup = new Notification();
@@ -18,6 +24,7 @@ async function loadAdProItems(firstResult = 0) {
                                     <td class="wide-column">${pro.title}</td>
                                     <td class="wide-column">${pro.model.brand.name}</td>
                                     <td>${pro.color.value}</td>
+                                    <td>${pro.qty}</td>
                                     <td class="wide-column">${pro.price}</td>
                                     <td class="wide-column">${pro.status.value}</td>
                                     <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
@@ -28,11 +35,11 @@ async function loadAdProItems(firstResult = 0) {
             totalPages = Math.ceil(json.allProductCount / adproPerPage);
             updatePaginationUI();
         } else {
-            popup.error({ message: json.message });
+            popup.error({message: json.message});
         }
     } else {
-        popup.error({ message: "Product Items Loading Failed" });
-    }
+        popup.error({message: "Product Items Loading Failed"});
+}
 }
 
 function updatePaginationUI() {
@@ -72,7 +79,8 @@ function createPaginationLink(text, onClick, disabled = false, active = false) {
 
     a.addEventListener("click", (e) => {
         e.preventDefault();
-        if (!disabled) onClick();
+        if (!disabled)
+            onClick();
     });
 
     li.appendChild(a);
@@ -80,8 +88,174 @@ function createPaginationLink(text, onClick, disabled = false, active = false) {
 }
 
 function goToPage(page) {
-    if (page < 0 || page >= totalPages) return;
+    if (page < 0 || page >= totalPages)
+        return;
     currentPage = page;
     loadAdProItems(currentPage * adproPerPage);
 }
 
+
+//////////download report
+async function downloadPDF() {
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF();
+
+    // === Set Title ===
+    doc.setFont("times", "bold");
+    doc.setFontSize(18);
+    doc.text("Product Report", 14, 20);
+
+    // === Add Date/Time ===
+    const now = new Date();
+    const formattedDate = now.toLocaleString(); // e.g., "7/29/2025, 3:30:00 PM"
+    doc.setFont("times", "normal");
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${formattedDate}`, 14, 27);
+
+    // === Table Headers ===
+    const headers = [];
+    document.querySelectorAll("#allProducts thead th").forEach(th => {
+        headers.push(th.innerText);
+    });
+
+    // === Table Body Data ===
+    const rows = [];
+    document.querySelectorAll("#allProducts tbody tr").forEach(tr => {
+        const row = [];
+        tr.querySelectorAll("td").forEach(td => row.push(td.innerText));
+        rows.push(row);
+    });
+
+    // === AutoTable Generation ===
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        startY: 35,
+        styles: {
+            font: "times",
+            fontSize: 11
+        },
+        headStyles: {
+            fillColor: [41, 128, 185], // blue header background
+            textColor: 255,
+            fontStyle: "bold"
+        },
+        alternateRowStyles: {
+            fillColor: [245, 245, 245] // light gray
+        }
+    });
+
+    // === Save PDF ===
+    doc.save("Product_Report.pdf");
+}
+
+//add brand
+async function addBrand() {
+    const popup = new Notification();
+    const brand = document.getElementById("addNewbrand").value;
+    console.log(brand);
+    const data = {
+        brand: brand
+    };
+
+    const dataJson = JSON.stringify(data);
+
+    const response = await fetch("AddBrand", {
+        method: "POST",
+        body: dataJson,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.ok) {
+        const json = await response.json(); // if servlet returns JSON
+        if (json.status) {
+            popup.success({
+                message: json.message || "Brand added successfully!"
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        } else if (json.message == "Please sign in!") {
+            window.location = "adminSign-in.html";
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else {
+        popup.error({
+            message: "Failed to send brand data to server."
+        });
+    }
+}
+
+async function loadBrandData() {
+    const response = await fetch("LoadProdcutData");
+    if (response.ok) {
+        const json = await response.json();
+        if (json.status) {
+            loadSelect("sbrand", json.brandList, "name");
+        } else {
+            document.getElementById("message").innerHTML = "Something went wrong. Please try again later";
+        }
+    } else {
+        document.getElementById("message").innerHTML = "Product loading failed. Please try again";
+    }
+}
+
+function loadSelect(selectId, items, property) {
+    const select = document.getElementById(selectId);
+    items.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.innerHTML = item[property];
+        select.appendChild(option);
+    });
+}
+
+
+////////////Add Model
+async function addModel(){
+    const popup = new Notification();
+    const model = document.getElementById("newmodel").value;
+    const brandId = document.getElementById("sbrand").value;
+    const data = {
+        brandId: brandId,
+        model: model
+    };
+
+    console.log(data);
+    const dataJson = JSON.stringify(data);
+
+    const response = await fetch("AddModel", {
+        method: "POST",
+        body: dataJson,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.ok) {
+        const json = await response.json(); // if servlet returns JSON
+        if (json.status) {
+            popup.success({
+                message: json.message || "Model added successfully!"
+            });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        } else if (json.message == "Please sign in!") {
+            window.location = "adminSign-in.html";
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else {
+        popup.error({
+            message: "Failed to send model data to server."
+        });
+    }
+}

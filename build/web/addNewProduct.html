@@ -43,7 +43,7 @@
     </head>
 
 
-    <body onload="loadProductData(); loadAdProItems();">
+    <body onload="loadProductData(); loadProData();">
         <div class="wrapper bg--shaft">
             <!-- Header Area Start -->
             <header class="header headery-style-1">
@@ -56,10 +56,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h1 class="page-title">My Account</h1>
+                            <h1 class="page-title">Manage Products</h1>
                             <ul class="breadcrumb justify-content-center">
                                 <li><a href="index.html">Home</a></li>
-                                <li class="current"><a href="my-account.html">My Account</a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,7 +78,7 @@
                                         <a class="nav-link" href="adminDash.html">Dashboard</a>
                                         <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#allProducts" aria-controls="orders" aria-selected="true">All Products</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#addProduct" aria-controls="product" aria-selected="true">Add New Product</a>
-                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#downloads" aria-controls="downloads" aria-selected="true">Downloads</a>
+                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#addbrand" aria-controls="addbrand" aria-selected="true">Add Brand</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#accountdetails" aria-controls="accountdetails" aria-selected="true">Account Details</a>
                                         <a class="nav-link" href="login-register.html">Logout</a>
                                     </div>
@@ -96,6 +95,7 @@
                                                             <th>Title</th>
                                                             <th>Brand</th>
                                                             <th>Color</th>
+                                                            <th>Qty</th>
                                                             <th>Price</th>
                                                             <th>Status</th>
                                                         </tr>
@@ -104,6 +104,12 @@
 
                                                     </tbody>
                                                 </table>
+                                            </div>
+
+                                            <div class="form-row mt--20">
+                                                <div class="col-12">
+                                                    <button class="btn btn-medium btn-style-2" onclick="downloadPDF()">Get Report</button>
+                                                </div>
                                             </div>
 
                                             <div class="pagination-wrap mt--15 mt-md--10">
@@ -210,162 +216,54 @@
                                                 </div>
                                             </div>
 
-
-
                                         </div>
 
 
+                                        <div class="tab-pane fade" id="addbrand">
 
-                                        <div class="tab-pane fade" id="downloads">
-                                            <div class="account-table table-content table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product</th>
-                                                            <th>Downloads</th>
-                                                            <th>Expires</th>
-                                                            <th>Download</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
-                                                            <td class="wide-column">August 10, 2018</td>
-                                                            <td>Never</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="wide-column">Volga - Ecommerce Bootstrap Template</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Never</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">Download File</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <!-- Add Brand Section -->
+                                            <div class="form-row mb--20 row">
+                                                <div class="col-12">
+                                                    <h3 class="pb--10">Add Brand</h3>
+                                                </div>
+
+                                                <div class="form__group col-md-6 mb-3">
+                                                    <label for="addbrand" class="form__label">Brand <span>*</span></label>
+                                                    <input id="addNewbrand" type="text" class=" form__input form__input--2" value="" style="border: 1px solid white;">
+                                                </div>
+
+                                                <div class="col-md-6 d-flex align-items-end mb-3">
+                                                    <button type="submit" class="btn btn-medium btn-style-2" onclick="addBrand();">Add Brand</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="addresses">
-                                            <div class="shipping-address">
-                                                <p>The following addresses will be used on the checkout page by default.</p>
-                                                <h4>Shipping ADDRESS</h4>
-                                                <div class="col-lg-12">
-                                                    <ul class="address-details" id="addressUL">
-                                                        <li id="addName">Name: Name</li>
-                                                        <li id="addEmail">Email:  example@email.com</li>
-                                                        <li id="contact">Phone:  Phone Number</li>
-                                                        <li class="mt--30" id="address"></li>
-                                                    </ul>
-                                                </div>
-                                                <!--                                                <a href="#" data-attr="#shipping_address" class="btn btn-medium btn-style-1 expand_action">Edit</a>
-                                                
-                                                                                                <div class="address-form bg--2 mt--20 hide-in-default" id="shipping_address">
-                                                                                                    <form action="#" class="form">
-                                                
-                                                                                                        <div class="form-row">
-                                                                                                            <div class="form__group col-12">
-                                                                                                                <button type="submit" class="btn btn-5 btn-style-2">Save Address</button>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </form>
-                                                                                                </div>-->
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="accountdetails">
-                                            <div class="account-form bg--2">
 
-                                                <div class="form-row mb--20 row">
-                                                    <div class="form__group col-md-6 mb-sm--30">
-                                                        <label for="shipping_fname" class="form__label">First Name <span>*</span></label>
-                                                        <input type="text" name="shipping_fname" id="shipping_fname" class="form__input form__input--2">
-                                                    </div>
-                                                    <div class="form__group col-md-6">
-                                                        <label for="shipping_lname" class="form__label">Last Name <span>*</span></label>
-                                                        <input type="text" name="shipping_lname" id="shipping_lname" class="form__input form__input--2">
-                                                    </div>
+                                            <!-- Add Model Section -->
+                                            <div class="form-row mb--20 row">
+                                                <div class="col-12">
+                                                    <h3 class="pb--10">Add Model</h3>
                                                 </div>
 
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_streetAddress" class="form__label">Address Line One</label>
-                                                        <input type="text" name="shipping_streetAddress" id="lineOne" class="form__input form__input--2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_apartment" class="form__label">Address Line Two</label>
-                                                        <input type="text" name="shipping_apartment" id="lineTwo" class="form__input form__input--2">
-                                                    </div>
+                                                <div class="form__group col-md-6 mb-3">
+                                                    <label for="sbrand" class="form__label">Brand <span>*</span></label>
+                                                    <select id="sbrand" class="form__input form__input--2" style="border: 1px solid white;">
+                                                        <option value="0">Select a brand</option>
+                                                    </select>
                                                 </div>
 
-                                                <!--                                                    <div class="form-row mb--20">
-                                                                                                        <div class="form__group col-12">
-                                                                                                            <label for="shipping_district" class="form__label">District <span>*</span></label>
-                                                                                                            <select name="shipping_district" id="shipping_district" class="form__input form__input--2 nice-select">
-                                                                                                                <option value="">Select a District…</option>
-                                                                                                                <option>BARISAL</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>-->
-
-                                                <div class="form-row mb--20">
-                                                    <div class="form__group col-12">
-                                                        <label for="shipping_city" class="form__label">City <span>*</span></label>
-                                                        <select id="citySelect" class="form__input form__input--2">
-                                                            <option value="0">Select a City</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="form__group col-md-6 mb-3">
+                                                    <label for="model" class="form__label">Model <span>*</span></label>
+                                                    <input type="text" name="model" id="newmodel" class="form__input form__input--2" style="border: 1px solid white;">
                                                 </div>
 
-                                                <div class="form-row mb--20 row">
-                                                    <div class="form__group col-md-6">
-                                                        <label for="shipping_zip" class="form__label">Postal Code <span>*</span></label>
-                                                        <input type="text" name="shipping_zip" id="postalCode" class="form__input form__input--2">
-                                                    </div>
-                                                    <div class="form__group col-md-6 mb-sm--30">
-                                                        <label for="shipping_phone" class="form__label">Phone</label>
-                                                        <input type="text" name="shipping_phone" id="mobile" class="form__input form__input--2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
+                                                <div class="form__group col-md-6 mt--20">
                                                     <div class="col-12">
-                                                        <h4>PASSWORD CHANGE</h4>
+                                                        <button type="submit" class="btn btn-medium btn-style-2" onclick="addModel();">Add Model</button>
                                                     </div>
                                                 </div>
-                                                <div class="form-row mb--20">
-                                                    <div class="col-12">
-                                                        <div class="form__group">
-                                                            <label for="cur_password" class="form__label">Current Password (leave blank to leave unchanged)</label>
-                                                            <input type="password" name="cur_password" id="currentPassword" class="form__input form__input--2">
-                                                        </div>
-                                                    </div>
-                                                </div>                                             
-                                                <div class="form-row mb--20">
-                                                    <div class="col-12">
-                                                        <div class="form__group">
-                                                            <label for="new_password" class="form__label">New Password (leave blank to leave unchanged)</label>
-                                                            <input type="password" name="new_password" id="newPassword" class="form__input form__input--2">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row mb--20">
-                                                    <div class="col-12">
-                                                        <div class="form__group">
-                                                            <label for="new_password" class="form__label">Confirm Password</label>
-                                                            <input type="password" name="confirm_password" id="confirmPassword" class="form__input form__input--2">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="text-danger" id="message" ></p>
-                                                <div class="form-row">
-                                                    <div class="col-12">
-                                                        <button type="submit" class="btn btn-medium btn-style-2" onclick="saveChanges();">Save Changes</button>
-                                                    </div>
-                                                </div>
-
-
                                             </div>
 
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -522,6 +420,12 @@
         <script src="assets/js/vendor/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
         <!-- Bootstrap and Popper Bundle JS -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>

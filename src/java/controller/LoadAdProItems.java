@@ -34,7 +34,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     responseObject.addProperty("status", false);
 
     int firstResult = 0;
-    int maxResults = 10;
+    int maxResults = 20;
 
     try {
         if (request.getParameter("firstResult") != null) {
