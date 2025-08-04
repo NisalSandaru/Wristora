@@ -95,7 +95,7 @@ async function saveProduct() {
             document.getElementById("img4").value = "";
         } else {
             if (json.message === "Please sign in!") {
-                window.location = "sign-in.html";
+                window.location = "adminSign-in.html";
             } else {
                 popup.error({
                     message: json.message

@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import hibernate.HibernateUtil;
+import hibernate.Role;
 import hibernate.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,21 +23,21 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author User
  */
-@WebServlet(name = "SignIn", urlPatterns = {"/SignIn"})
-public class SignIn extends HttpServlet {
+@WebServlet(name = "AdminSignIn", urlPatterns = {"/AdminSignIn"})
+public class AdminSignIn extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         Gson gson = new Gson();
         JsonObject signIn = gson.fromJson(req.getReader(), JsonObject.class);
-        
+
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", false);
-        
+
         final String email = signIn.get("email").getAsString();
         String password = signIn.get("password").getAsString();
-        
+
         if (email.isEmpty()) {
             responseObject.addProperty("message", "Email can be empty!");
         } else if (!Util.isEmailValid(email)) {
@@ -50,13 +47,16 @@ public class SignIn extends HttpServlet {
         } else {
             Session s = HibernateUtil.getSessionFactory().openSession();
             Criteria c = s.createCriteria(User.class);
+            Role adminRole = (Role) s.get(Role.class, 1);
 
             Criterion crt1 = Restrictions.eq("email", email);
             Criterion crt2 = Restrictions.eq("password", password);
+            Criterion crt3 = Restrictions.eq("role", adminRole);
 
             c.add(crt1);
             c.add(crt2);
-            
+            c.add(crt3);
+
             if (c.list().isEmpty()) {
                 responseObject.addProperty("message", "Invalide ceredentials!");
             } else {
@@ -67,18 +67,9 @@ public class SignIn extends HttpServlet {
                 //Add session 
                 HttpSession ses = req.getSession();
 
-                if (!u.getVerification().equals("Verified")) { // not verifide
+                ses.setAttribute("admin", u);
+                responseObject.addProperty("message", "2"); // Verifide User
 
-                    ses.setAttribute("email", email);
-
-                    responseObject.addProperty("message", "1"); // Not Verifide User
-
-                } else { //Verifide
-
-                    ses.setAttribute("user", u);
-                    responseObject.addProperty("message", "2"); // Verifide User
-
-                }
             }
             s.close();
         }

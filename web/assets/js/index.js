@@ -1,10 +1,25 @@
 function indexOnloadFunctions() {
     checkSessionCart();
     loadProductData();
+    checkSessionWIsh();
 }
 async function checkSessionCart() {
     const popup = new Notification();
     const response = await fetch("CheckSessionCart");
+    if (response.status === 1) {  // 401 = Unauthorized
+        popup.error({
+            message: "You are not logged in!"
+        });
+    } else if (!response.ok) {
+        popup.error({
+            message: "Something went wrong! Try again shortly"
+        });
+    }
+}
+
+async function checkSessionWIsh() {
+    const popup = new Notification();
+    const response = await fetch("CheckSessionWish");
     if (response.status === 1) {  // 401 = Unauthorized
         popup.error({
             message: "You are not logged in!"
@@ -75,7 +90,7 @@ function loadNewArrivals(json) {
                                         </div>
                                         <p>It is a long established fact that a reader will be distracted by the readable content...</p>
                                         <div class="product-action">
-                                            <a class="same-action" href="wishlist.html" title="wishlist">
+                                            <a class="same-action" onclick="addToWishlist(${item.id});" title="wishlist">
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
                                             <a href="#" class="add_cart cart-item action-cart" title="wishlist"><span onclick="addToCart(${item.id},1);">Add to cart</span></a>
@@ -94,6 +109,29 @@ function loadNewArrivals(json) {
 async function addToCart(productId, qty) {
     const popup = new Notification();// link notification js in single-product.html
     const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
+    if (response.ok) {
+        const json = await response.json(); // await response.text();
+        if (json.status) {
+            popup.success({
+                message: json.message
+            });
+        } else {
+            popup.error({
+                message: json.message
+            });
+
+        }
+    } else {
+        popup.error({
+            message: "Something went wrong. Try again"
+        });
+    }
+}
+
+
+async function addToWishlist(productId) {
+    const popup = new Notification();
+    const response = await fetch("AddToWishlist?prId=" + productId );
     if (response.ok) {
         const json = await response.json(); // await response.text();
         if (json.status) {

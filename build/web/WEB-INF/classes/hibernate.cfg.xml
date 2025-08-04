@@ -24,6 +24,7 @@
         <mapping class="hibernate.OrderItems"/>
         <mapping class="hibernate.OrderStatus"/>
         <mapping class="hibernate.Orders"/>
+        <mapping class="hibernate.Wishlist"/>
 
     </session-factory>
 </hibernate-configuration>

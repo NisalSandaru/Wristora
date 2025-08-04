@@ -1,4 +1,3 @@
-
 package controller;
 
 import com.google.gson.Gson;
@@ -6,6 +5,7 @@ import com.google.gson.JsonObject;
 import hibernate.Cart;
 import hibernate.HibernateUtil;
 import hibernate.User;
+import hibernate.Wishlist;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,12 +20,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author User
- */
-@WebServlet(name = "LoadCartItems", urlPatterns = {"/LoadCartItems"})
-public class LoadCartItems extends HttpServlet {
+@WebServlet(name = "LoadWishlistItems", urlPatterns = {"/LoadWishlistItems"})
+public class LoadWishlistItems extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,41 +33,40 @@ public class LoadCartItems extends HttpServlet {
         if (user != null) { //db cart
             SessionFactory sf = HibernateUtil.getSessionFactory();
             Session s = sf.openSession();
-            Criteria c1 = s.createCriteria(Cart.class);
+            Criteria c1 = s.createCriteria(Wishlist.class);
             c1.add(Restrictions.eq("user", user));
-            List<Cart> cartList = c1.list();
-            if (cartList.isEmpty()) {
-                responseObject.addProperty("message", "Cart is Empty");
+            List<Wishlist> wishlistList = c1.list();
+            if (wishlistList.isEmpty()) {
+                responseObject.addProperty("message", "wishlist is Empty");
             } else {
-                for (Cart cart : cartList) {
-                    cart.getProduct().setUser(null);
-                    cart.setUser(null);
+                for (Wishlist wishlist : wishlistList) {
+                    wishlist.getProduct().setUser(null);
+                    wishlist.setUser(null);
                 }
                 responseObject.addProperty("status", true);
-                responseObject.addProperty("message", "Cart items successfully loaded");
-                responseObject.add("cartItems", gson.toJsonTree(cartList));
+                responseObject.addProperty("message", "wishlist items successfully loaded");
+                responseObject.add("sessionWishes", gson.toJsonTree(wishlistList));
             }
         } else { //session cart
-            ArrayList<Cart> sessionCarts = (ArrayList<Cart>) req.getSession().getAttribute("sessionCart");
-            if (sessionCarts != null) {
-                if (sessionCarts.isEmpty()) {
-                    responseObject.addProperty("message", "your cart is Empty.");
+            ArrayList<Wishlist> sessionWishes = (ArrayList<Wishlist>) req.getSession().getAttribute("sessionWishes");
+            if (sessionWishes != null) {
+                if (sessionWishes.isEmpty()) {
+                    responseObject.addProperty("message", "your wishlist is Empty.");
                 } else {
-                    for (Cart sessionCart : sessionCarts) {
-                        sessionCart.getProduct().setUser(null);
-                        sessionCart.setUser(null);
+                    for (Wishlist sessionWish : sessionWishes) {
+                        sessionWish.getProduct().setUser(null);
+                        sessionWish.setUser(null);
                     }
                     responseObject.addProperty("status", true);
-                    responseObject.addProperty("message", "Cart items successfully loaded");
-                    responseObject.add("cartItems", gson.toJsonTree(sessionCarts));
+                    responseObject.addProperty("message", "Wishlist items successfully loaded");
+                    responseObject.add("sessionWishes", gson.toJsonTree(sessionWishes));
                 }
-            }else{
-                responseObject.addProperty("message", "your cart is Empty.");
+            } else {
+                responseObject.addProperty("message", "your wishlist is Empty.");
             }
         }
         resp.setContentType("application/json");
         String toJson = gson.toJson(responseObject);
         resp.getWriter().write(toJson);
     }
-
 }

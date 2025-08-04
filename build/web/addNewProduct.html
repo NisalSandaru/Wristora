@@ -43,7 +43,7 @@
     </head>
 
 
-    <body onload="loadProductData();">
+    <body onload="loadProductData(); loadAdProItems();">
         <div class="wrapper bg--shaft">
             <!-- Header Area Start -->
             <header class="header headery-style-1">
@@ -76,9 +76,9 @@
                             <div class="row">
                                 <div class="col-lg-3 mb-md--30">
                                     <div class="user-dashboard-tab__head nav flex-column" role="tablist" aria-orientation="vertical">
-                                        <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#dashboard" aria-controls="dashboard" aria-selected="true">Dashboard</a>
+                                        <a class="nav-link" href="adminDash.html">Dashboard</a>
+                                        <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#allProducts" aria-controls="orders" aria-selected="true">All Products</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#addProduct" aria-controls="product" aria-selected="true">Add New Product</a>
-                                        <a class="nav-link" data-bs-toggle="pill" role="tab" href="#orders" aria-controls="orders" aria-selected="true">Orders</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#downloads" aria-controls="downloads" aria-selected="true">Downloads</a>
                                         <a class="nav-link" data-bs-toggle="pill" role="tab" href="#accountdetails" aria-controls="accountdetails" aria-selected="true">Account Details</a>
                                         <a class="nav-link" href="login-register.html">Logout</a>
@@ -86,9 +86,37 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="user-dashboard-tab__content tab-content">
-                                        <div class="tab-pane fade show active" id="dashboard">
-                                            <p>Hello <strong>John</strong> (not <strong>John</strong>? <a href="login.html">Log out</a>)</p>
-                                            <p>From your account dashboard. you can easily check & view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details</a>.</p>
+
+                                        <div class="tab-pane fade show active" id="allProducts">
+                                            <div class="account-table table-content table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Title</th>
+                                                            <th>Brand</th>
+                                                            <th>Color</th>
+                                                            <th>Price</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="adpro-item-container">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="pagination-wrap mt--15 mt-md--10">
+                                                <ul class="pagination" id="st-pagination-container">
+                                                    <li><a href="#" class="first">|&lt;</a></li>
+                                                    <li><a href="#" class="prev">&lt;</a></li>
+                                                    <li><a href="#" class="current">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#" class="next">&gt;</a></li>
+                                                    <li><a href="#" class="next">&gt;|</a></li>
+                                                </ul>
+                                            </div>
+
                                         </div>
 
                                         <div class="tab-pane fade" id="addProduct">
@@ -186,37 +214,7 @@
 
                                         </div>
 
-                                        <div class="tab-pane fade" id="orders">
-                                            <div class="account-table table-content table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
-                                                            <th>Total</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Processing</td>
-                                                            <td class="wide-column">$25.00 for 1 item</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td class="wide-column">September 19, 2018</td>
-                                                            <td>Processing</td>
-                                                            <td class="wide-column">$25.00 for 1 item</td>
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+
 
                                         <div class="tab-pane fade" id="downloads">
                                             <div class="account-table table-content table-responsive">
@@ -522,6 +520,8 @@
 
         <!-- jQuery JS -->
         <script src="assets/js/vendor/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
         <!-- Bootstrap and Popper Bundle JS -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -535,5 +535,6 @@
         <script src="assets/js/main.js"></script>
         <script src="assets/js/notification.js"></script>
         <script src="assets/js/product-listing.js"></script>
+        <script src="assets/js/loadAdminProData.js"></script>
     </body>
 </html>

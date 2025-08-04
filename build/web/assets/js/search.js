@@ -155,6 +155,11 @@ function updateProductView(json) {
             addToCart(product.id, 1);
             e.preventDefault();
         });
+        st_product_clone.querySelector("#add-to-wish").addEventListener(
+                "click", (e) => {
+            addToWishlist(product.id);
+            e.preventDefault();
+        });
         st_product_clone.querySelector("#st-product-a-2").href = "single-product.html?id=" + product.id;
         st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
         st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
@@ -168,6 +173,28 @@ function updateProductView(json) {
 
     updatePagination(json.allProductCount);
 
+}
+
+async function addToWishlist(productId) {
+    const popup = new Notification();
+    const response = await fetch("AddToWishlist?prId=" + productId );
+    if (response.ok) {
+        const json = await response.json(); // await response.text();
+        if (json.status) {
+            popup.success({
+                message: json.message
+            });
+        } else {
+            popup.error({
+                message: json.message
+            });
+
+        }
+    } else {
+        popup.error({
+            message: "Something went wrong. Try again"
+        });
+    }
 }
 
 function updatePagination(allProductCount) {

@@ -59,7 +59,7 @@ public class SaveProduct extends HttpServlet {
         Session s = sf.openSession();
 
         //validation
-        if (request.getSession().getAttribute("user") == null) {
+        if (request.getSession().getAttribute("admin") == null) {
             responseObject.addProperty("message", "Please sign in!");
         } else if (!Util.isInteger(brandId)) {
             responseObject.addProperty("message", "Invalid brand!");
@@ -131,7 +131,9 @@ public class SaveProduct extends HttpServlet {
 
                                 Status status = (Status) s.get(Status.class, SaveProduct.ACRIVE_STAUTUS_ID);
                                 p.setStatus(status);
-                                User user = (User) request.getSession().getAttribute("user");
+                                User user = (User) request.getSession().getAttribute("admin");
+                                
+                                System.out.println(user);
 
                                 Criteria c1 = s.createCriteria(User.class);
                                 c1.add(Restrictions.eq("email", user.getEmail()));
