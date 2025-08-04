@@ -1,11 +1,18 @@
 # Wristora
 
-Wristora is a web application project. This repository contains the source code, configuration files, and resources for the Wristora application.
+Wristora is a web application for user management and product administration. This repository contains all source code, configuration files, and resources for the Wristora platform.
 
 ## Project Structure
 
 - `src/` - Java source code and configuration files
+- `src/java/controller/` - Servlets and controllers
+- `src/java/hibernate/` - Hibernate utility and entity classes
+- `src/java/model/` - Utility and filter classes
 - `web/` - Web resources (HTML, CSS, JS, images)
+- `web/assets/css/` - Stylesheets
+- `web/assets/js/` - JavaScript files
+- `web/assets/img/` - Images
+- `web/admingDash.html` - Admin dashboard
 - `lib/` - External libraries and dependencies
 - `db/` - Database models and backups
 - `build/` - Build output and generated files
@@ -37,14 +44,16 @@ Wristora is a web application project. This repository contains the source code,
 - Hibernate ORM integration
 - Email notifications
 - Session management
-- Admin dashboard with left sidebar navigation
+- Admin dashboard with left sidebar navigation (`web/admingDash.html`)
 - Product management: add, edit, and delete products
 
 ## Folder Details
 - `src/java/controller/` - Servlets and controllers
 - `src/java/hibernate/` - Hibernate utility and entity classes
 - `src/java/model/` - Utility and filter classes
-- `web/assets/` - Static assets (CSS, JS, images, fonts)
+- `web/assets/css/` - Stylesheets
+- `web/assets/js/` - JavaScript files
+- `web/assets/img/` - Images
 - `web/admingDash.html` - Admin dashboard HTML file
 
 ## License
