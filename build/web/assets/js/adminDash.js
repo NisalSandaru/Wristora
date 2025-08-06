@@ -1,5 +1,6 @@
 function loadAdminData() {
     loadAdOrderItems();
+    loadAdDashCount();
 }
 
 async  function loadAdOrderItems() {
@@ -28,6 +29,44 @@ async  function loadAdOrderItems() {
 
                 order_item_container.innerHTML += tableData;
             });
+
+        } else if (json.message === "Please log in.") {
+            window.location = "adminSign-in.html";
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else if (json.message === "Please log in.") {
+        window.location = "adminSign-in.html";
+    } else {
+        popup.error({
+            message: "Order Items Loading Failed"
+        });
+    }
+}
+
+
+async  function loadAdDashCount() {
+
+    const popup = new Notification();
+    const response = await fetch("LoadAdDashCount");
+    if (response.ok) {
+        const json = await response.json();
+        if (json.status) {
+            console.log(json);
+            document.getElementById("totalOrders").textContent = json.orderCount;
+            document.getElementById("totalProducts").textContent = json.productCount;
+            document.getElementById("totalUsers").textContent = json.userCount;
+
+            let revenue = 0;
+
+            json.orderItemsList.forEach(order => {
+                let price = parseFloat(order.product.price); // Ensure it's a number
+                revenue += price;
+            });
+
+            document.getElementById("totalRevenue").textContent = "Rs. " + revenue.toFixed(2);
 
         } else if (json.message === "Please log in.") {
             window.location = "adminSign-in.html";
