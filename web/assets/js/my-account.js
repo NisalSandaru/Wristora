@@ -20,6 +20,8 @@ async function getUserData() {
         document.getElementById("currentPassword").value = json.password;
 
         document.getElementById("addName").innerHTML = `Name : ${json.firstName} ${json.lastName}`;
+        document.getElementById("dname").innerHTML = `${json.firstName}`;
+        document.getElementById("nname").innerHTML = `${json.firstName}`;
         document.getElementById("addEmail").innerHTML = `Email : ${json.email}`;
         document.getElementById("contact").innerHTML = `Phone : ${json.mobile}`;
 

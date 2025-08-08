@@ -28,7 +28,7 @@ async  function loadWishItems() {
                 }
 
                 let tableData = `<tr>
-                                                    <td><a class="delete" href="#"><i class="fa fa-times"></i></a></td>
+                                                    <td><a class="delete" href="#"><i class="fa fa-times" onclick="removeWishItems(${wish.product.id});"></i></a></td>
                                                     <td>
                                                         <a href="product-details.html?id=${wish.product.id}">
                                                             <img src="product-images\\${wish.product.id}\\image1.png" alt="product">
