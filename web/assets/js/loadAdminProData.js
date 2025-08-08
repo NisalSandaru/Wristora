@@ -26,7 +26,11 @@ async function loadAdProItems(firstResult = 0) {
                                     <td>${pro.color.value}</td>
                                     <td>${pro.qty}</td>
                                     <td class="wide-column">${pro.price}</td>
-                                    <td class="wide-column">${pro.status.value}</td>
+                                    <td class="wide-column">
+                                        <button class="btn btn-medium btn-style-1" onclick="updateStatus(${pro.id}, ${pro.status.id})">
+                                            ${pro.status.value}
+                                        </button>
+                                    </td>
                                     <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
                                 </tr>`;
                 pro_item_container.innerHTML += tableData;
@@ -40,6 +44,44 @@ async function loadAdProItems(firstResult = 0) {
     } else {
         popup.error({message: "Product Items Loading Failed"});
 }
+}
+
+async function updateStatus(id){
+    console.log(id);
+    const popup = new Notification();
+    const data = {
+        id: id
+    };
+
+    const dataJson = JSON.stringify(data);
+
+    const response = await fetch("UpdateStatus", {
+        method: "POST",
+        body: dataJson,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.ok) {
+        const json = await response.json(); // if servlet returns JSON
+        if (json.status) {
+            popup.success({
+                message: json.message || "Status Updated successfully!"
+            });
+            loadAdProItems();
+        } else if (json.message == "Please sign in!") {
+            window.location = "adminSign-in.html";
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else {
+        popup.error({
+            message: "Failed to send data to server."
+        });
+    }
 }
 
 function updatePaginationUI() {
@@ -217,7 +259,7 @@ function loadSelect(selectId, items, property) {
 
 
 ////////////Add Model
-async function addModel(){
+async function addModel() {
     const popup = new Notification();
     const model = document.getElementById("newmodel").value;
     const brandId = document.getElementById("sbrand").value;

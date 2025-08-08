@@ -53,7 +53,7 @@ async function checkSessionCart() {
     const popup = new Notification();
     const response = await fetch("CheckSessionCart");
     if (response.status === 1) {  // 401 = Unauthorized
-        popup.error({
+        popup.success({
             message: "You are not logged in!"
         });
     } else if (!response.ok) {
@@ -67,9 +67,7 @@ async function checkSessionWIsh() {
     const popup = new Notification();
     const response = await fetch("CheckSessionWish");
     if (response.status === 1) {  // 401 = Unauthorized
-        popup.error({
-            message: "You are not logged in!"
-        });
+        
     } else if (!response.ok) {
         popup.error({
             message: "Something went wrong! Try again shortly"
