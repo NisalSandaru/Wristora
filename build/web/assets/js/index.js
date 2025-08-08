@@ -1,3 +1,49 @@
+//async function searchName() {
+//    const popup = new Notification();
+//
+//    let word = document.getElementById("search").value;
+//
+//    const data = {
+//        word: word
+//    };
+//
+//    const signISON = JSON.stringify(data);
+//
+//    const response = await fetch(
+//            "",
+//            {
+//                method: "GET",
+//                body: signISON,
+//                header: {
+//                    "Content-Type": "application/json"
+//                }
+//            }
+//    );
+//
+//    if (response.ok) { //success
+//        const json = await response.json();
+//
+//        if (json.status) { // if true
+//
+//            if (json.message === "1") {
+//                window.location = "verify-account.html";
+//            } else {
+//                window.location = "index.html";
+//            }
+//
+//        } else { // when enother statuse flase
+//            popup.error({
+//                message: json.message
+//            });
+//        }
+//
+//    } else {
+//        popup.error({
+//            message: "Something went wrong! Try again shortly"
+//        });
+//    }
+//}
+
 function indexOnloadFunctions() {
     checkSessionCart();
     loadProductData();
@@ -131,7 +177,7 @@ async function addToCart(productId, qty) {
 
 async function addToWishlist(productId) {
     const popup = new Notification();
-    const response = await fetch("AddToWishlist?prId=" + productId );
+    const response = await fetch("AddToWishlist?prId=" + productId);
     if (response.ok) {
         const json = await response.json(); // await response.text();
         if (json.status) {
