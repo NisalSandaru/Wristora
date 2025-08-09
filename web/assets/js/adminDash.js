@@ -24,7 +24,7 @@ async  function loadAdOrderItems() {
                                                             <td class="wide-column">${order.createdAt}</td>
                                                             <td>${order.orderStatus.value}</td>
                                                             
-                                                            <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
+                                                            <td><a href="orderItems.html?id=${order.id}" class="btn btn-medium btn-style-1">View</a></td>
                                                         </tr>`;
 
                 order_item_container.innerHTML += tableData;
