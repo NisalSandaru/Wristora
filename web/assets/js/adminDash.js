@@ -83,3 +83,58 @@ async  function loadAdDashCount() {
         });
     }
 }
+
+
+//////////download report
+async function downloadOrderPDF() {
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF();
+
+    // === Set Title ===
+    doc.setFont("times", "bold");
+    doc.setFontSize(18);
+    doc.text("Orders Report", 14, 20);
+
+    // === Add Date/Time ===
+    const now = new Date();
+    const formattedDate = now.toLocaleString(); // e.g., "7/29/2025, 3:30:00 PM"
+    doc.setFont("times", "normal");
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${formattedDate}`, 14, 27);
+
+    // === Table Headers ===
+    const headers = [];
+    document.querySelectorAll("#orders thead th").forEach(th => {
+        headers.push(th.innerText);
+    });
+
+    // === Table Body Data ===
+    const rows = [];
+    document.querySelectorAll("#orders tbody tr").forEach(tr => {
+        const row = [];
+        tr.querySelectorAll("td").forEach(td => row.push(td.innerText));
+        rows.push(row);
+    });
+
+    // === AutoTable Generation ===
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        startY: 35,
+        styles: {
+            font: "times",
+            fontSize: 11
+        },
+        headStyles: {
+            fillColor: [41, 128, 185], // blue header background
+            textColor: 255,
+            fontStyle: "bold"
+        },
+        alternateRowStyles: {
+            fillColor: [245, 245, 245] // light gray
+        }
+    });
+
+    // === Save PDF ===
+    doc.save("OrderItem_Report.pdf");
+}
