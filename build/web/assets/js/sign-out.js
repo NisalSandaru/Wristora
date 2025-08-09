@@ -12,3 +12,17 @@ async function signOut() {
         }
 }
 
+async function adSignOut() {
+    const response = await fetch("AdSignOut");
+        if (response.ok) {
+            const json = await response.json();
+            if (json.status) {
+                window.location = "adminSign-in.html";
+            } else {
+                window.location.reload();
+            }
+        } else {
+            console.log("Logout Failed!");
+        }
+}
+
