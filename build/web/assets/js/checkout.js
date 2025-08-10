@@ -3,6 +3,9 @@ payhere.onCompleted = function onCompleted(orderId) {
     popup.success({
         message: "Payment completed. OrderID:" + orderId
     });
+    setTimeout(() => {
+                window.location = "index.html";
+            }, 1500);
 };
 
 // Payment window closed

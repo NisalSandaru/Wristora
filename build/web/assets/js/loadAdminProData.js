@@ -31,7 +31,7 @@ async function loadAdProItems(firstResult = 0) {
                                             ${pro.status.value}
                                         </button>
                                     </td>
-                                    <td><a href="#" class="btn btn-medium btn-style-1">View</a></td>
+                                    <td><a href="updateProduct.html?id=${pro.id}" class="btn btn-medium btn-style-1">View</a></td>
                                 </tr>`;
                 pro_item_container.innerHTML += tableData;
             });
