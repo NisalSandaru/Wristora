@@ -23,10 +23,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author Dilhara
- */
+
 @WebServlet(name = "LoadCheckOutData", urlPatterns = {"/LoadCheckOutData"})
 public class LoadCheckOutData extends HttpServlet {
 

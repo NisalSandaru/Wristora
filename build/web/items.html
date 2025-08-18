@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 
-    <!-- Mirrored from htmldemo.net/mirora/mirora/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jul 2025 18:32:57 GMT -->
+    <!-- Mirrored from htmldemo.net/mirora/mirora/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jul 2025 18:32:24 GMT -->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
         <link rel="apple-touch-icon" href="assets/img/icon.png">
 
         <!-- Title -->
-        <title>Mirora - Watch & Luxury Store Bootstrap 5 Template</title>
+        <title>Wristora - Order Items</title>
 
         <!-- ************************* CSS Files ************************* -->
 
@@ -42,10 +42,8 @@
         <![endif]-->
     </head>
 
-    <body onload="loadCartItems(); viewCart();">
 
-
-        <!-- Main Wrapper Start -->
+    <body onload="items();">
         <div class="wrapper bg--shaft">
             <!-- Header Area Start -->
             <header class="header headery-style-1">
@@ -243,10 +241,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h1 class="page-title">Cart</h1>
+                            <h1 class="page-title">Invoice</h1>
                             <ul class="breadcrumb justify-content-center">
                                 <li><a href="index.html">Home</a></li>
-                                <li class="current"><a href="cart.html">Cart</a></li>
                             </ul>
                         </div>
                     </div>
@@ -254,252 +251,75 @@
             </div>
             <!-- Breadcumb area End -->
 
-            <!-- Main content wrapper start -->
+            <!-- Main Content wrapper start -->
 
-            <div class="main-content-wrapper">
-                <div class="cart-area pt--40 pb--80 pt-md--30 pb-md--60">
-                    <div class="container">
-                        <div class="cart-wrapper bg--2 mb--80 mb-md--60">
-                            <div class="row">
-                                <div class="col-12">
-                                    <!-- Cart Area Start -->
-                                    <form action="#" class="form cart-form">
-                                        <div class="cart-table table-content table-responsive">
-                                            <table class="table mb--30">
-                                                <thead>
-                                                    <tr>
-                                                        <th>remove</th>
-                                                        <th>Images</th>
-                                                        <th>Product</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Quantity</th>
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody  id="cart-item-container">
+            <section class="main-content-wrapper" style="background-size: cover; min-height: 100vh;">
+                <div class="account-wrapper pt--20 pb--40 pt-md--30 pb-md--60">
+                    <div class="p-4">
+                        <div class="user-dashboard-tab">
+                            <div class="row" style="align-items: stretch;">
+                                <div class="col-lg-3 mb-md--30" style="display: flex;">
+                                    <div class="user-dashboard-tab__head nav flex-column w-100" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link" href="my-account.html">Dashboard</a>
+                                        <a class="nav-link active" data-bs-toggle="pill" role="tab" href="#orderItems" aria-controls="orderItems" aria-selected="true">order Items</a>
+                                        <a class="nav-link" onclick="signOut();">Logout</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 d-flex">
+                                    <div class="user-dashboard-tab__content tab-content w-100">
+                                        <div class="tab-pane fade show active" id="orderItems">
+                                            <div class="account-table table-content table-responsive">
 
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>pid</th>
+                                                            <th>name</th>
+                                                            <th>color</th>
+                                                            <th>condition</th>
+                                                            <th>qty</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="item-container">
+                                                        <tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        </tr>
+                                                    </tbody>
 
-<!--                                        <div class="row">
-                                            <div class="col-12 text-md-right">
-                                                <div class="cart-btn-group">
-                                                    <a href="" onclick="addColor();" class="btn btn-medium btn-style-3">Update Cart</a>
+                                                </table>
+                                                <div class="row">
+                                                    <div class="d-flex justify-content-between w-100 align-items-center ps-5 pe-5">
+                                                        <div style="font: bold">Total</div>
+                                                        <div id="allTotal"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mt--20">
+                                                    <div class="col-12">
+                                                        <button class="btn btn-medium btn-style-2" onclick="downloadItemPDF()">Download</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>-->
-                                    </form>
-                                    <!-- Cart Area End --> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-page-total-wrapper">
-                            <div class="row justify-content-end">
-                                <div class="col-xl-6 col-lg-8 col-md-10">
-                                    <div class="cart-page-total bg--dark-3">
-                                        <h2>Cart Totals</h2>
-                                        <div class="cart-calculator-table table-content table-responsive">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr class="cart-subtotal">
-                                                        <th>Qty</th>
-                                                        <td><span class="price-ammount" id="order-total-quantity">$140.00</span></td>
-                                                    </tr>
-                                                    <tr class="cart-total">
-                                                        <th>TOTAL</th>
-                                                        <td><span class="price-ammount"  id="order-total-amount">$145.00</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
-                                        <a href="checkout.html" class="btn btn-medium btn-style-3">Proceed to Checkout</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>      
+                        </div> 
+                    </div>    
                 </div>
-            </div>
+            </section>
 
-            <!-- Main content wrapper end -->
+            <!-- Main Content wrapper end -->
 
             <!-- Footer Start -->
             <footer class="footer border-top ptb--40 ptb-md--30">
-                <div class="container">
-                    <div class="row mb--40 mb-md--30">
-                        <div class="col-lg-4 col-md-6 mb-md--30">
-                            <div class="footer-widget">
-                                <h3 class="widget-title">About Wristora</h3>
-                                <div class="widget-content mb--20">
-                                    <p>Address: 123 Main Street, Anytown, <br> Colombo - Sri Lanka.</p>
-                                    <p>Phone: (+94) 704 258 954</p>
-                                    <p>Whatsapp: (+94) 704 258 954</p>
-                                    <p>Email: Contact@wristora.com</p>
-                                </div>
-                                <ul class="social social-round">
-                                    <li class="social__item">
-                                        <a class="social__link"  href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="social__link"  href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="social__link"  href="https://youtube.com/" target="_blank" rel="noopener noreferrer">
-                                            <i class="fa fa-youtube"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="social__link"  href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="social__link"  href="https://plus.google.com/" target="_blank" rel="noopener noreferrer">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 mb-md--30">
-                            <div class="footer-widget">
-                                <h3 class="widget-title">Information</h3>
-                                <ul class="widget-menu">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Terms &amp; Conditions</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 mb-sm--30">
-                            <div class="footer-widget">
-                                <h3 class="widget-title">Extras</h3>
-                                <ul class="widget-menu">
-                                    <li><a href="#">Brands</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="footer-widget">
-                                <h3 class="widget-title">Custom Products</h3>
-                                <div class="widget-product">
-                                    <div class="product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/11-450x450.jpg" alt="products">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <h4 class="product-title">
-                                                <a href="product-details.html" tabindex="0">Acer Aspire E 15</a>
-                                            </h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product">
-                                        <div class="product-img">
-                                            <img src="assets/img/products/11-450x450.jpg" alt="products">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="product-rating">
-                                                <span>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star theme-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                            </div>
-                                            <h4 class="product-title">
-                                                <a href="product-details.html" tabindex="0">Acer Aspire E 15</a>
-                                            </h4>
-                                            <div class="product-price-wrapper">
-                                                <span class="money">$550.00</span>
-                                                <span class="product-price-old">
-                                                    <span class="money">$700.00</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb--40 mb-md--30">
-                        <div class="col-12">
-                            <ul class="footer-menu">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Online Store</a></li>
-                                <li><a href="#">Promotion</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms Of Use</a></li>
-                                <li><a href="#">Sitemap</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <p class="copyright-text">&copy; Wristora 2025 Made With <i class="fa fa-heart"></i> BY <a href="">Nisal</a> </p>
-                            <img src="assets/img/others/payment.png" alt="payment">
-                        </div>
-                    </div>
-                </div>
+
             </footer>
             <!-- Footer End -->
 
             <!-- Scroll To Top Start -->    
             <a class="scroll-to-top" href="#"><i class="fa fa-angle-double-up"></i></a>
             <!-- Scroll To Top End -->
-
-            <!-- Popup Subscribe Box Start -->
-
-            <!-- <div class="popup-subscribe-box" id="subscribe-popup">
-                <div class="popup-subscribe-box-content">
-                    <div class="popup-subscribe-box-body">
-                        <a href="#subscribe-popup" class="popup-close">close</a>
-                        <h3>NEWSLETTER</h3>
-                        <p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
-                        <form class="popup-subscribe-form validate" action="https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
-                            <input type="email" name="popup-subscribe-email" id="popup-subscribe-email" placeholder="Enter your email here...">
-                            <input type="submit" value="Subscribe" class="btn subscribe-btn btn-medium btn-style-1">
-                            <div class="form-group text-center mt--20">
-                                <input type="checkbox" name="hide-popup" id="hide-popup">
-                                <label for="hide-popup"> Don't show this popup again </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Popup Subscribe Box End -->
 
             <!-- Modal Start -->
             <div class="modal fade product-modal" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -627,11 +447,22 @@
             </div>
             <!-- Modal End -->
 
+            <footer class="p-5">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="copyright-text">&copy; Wristora 2025 Made With <i class="fa fa-heart"></i> BY <a href="">Nisal</a> </p>
+                    </div>
+                </div>
+            </footer>
+
         </div>
-        <!-- Main Wrapper End -->
+
 
 
         <!-- ************************* JS Files ************************* -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
         <!-- jQuery JS -->
         <script src="assets/js/vendor/jquery.min.js"></script>
@@ -646,14 +477,8 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
-        <script src="assets/js/cart.js"></script>
-        <script src="assets/js/miniCart.js"></script>
         <script src="assets/js/notification.js"></script>
-        <script src="assets/js/removeCart.js"></script>
-        <script src="assets/js/addColor.js"></script>
-
+        <script src="assets/js/items.js"></script>
+        <script src="assets/js/sign-out.js"></script>
     </body>
-
-
-    <!-- Mirrored from htmldemo.net/mirora/mirora/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jul 2025 18:32:57 GMT -->
 </html>

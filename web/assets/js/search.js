@@ -160,7 +160,7 @@ function updateProductView(json) {
             addToWishlist(product.id);
             e.preventDefault();
         });
-        st_product_clone.querySelector("#st-product-a-2").href = "single-product.html?id=" + product.id;
+        st_product_clone.querySelector("#st-product-a-2").href = "product-details.html?id=" + product.id;
         st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
         st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
                 "en-US",
